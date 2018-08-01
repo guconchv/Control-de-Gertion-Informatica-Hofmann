@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace ControlArriendos
+{
+    public partial class Consultas : System.Web.UI.Page
+    {
+        string cadenaConexion = MasterPage.CadenaConexion;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                PanelPrincipal.Visible = true;
+                PanelConsulta1.Visible = true;
+                PanelConsulta2.Visible = false;
+                PanelConsulta3.visible = false;
+                
+                
+
+            }
+        }
+    }
+}

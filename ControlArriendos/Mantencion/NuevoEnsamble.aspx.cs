@@ -1,0 +1,240 @@
+﻿using Negocios;
+using Presentacion;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Windows.Forms;
+
+namespace ControlArriendos.Mantencion
+{
+    public partial class NuevoEnsamble : System.Web.UI.Page
+    {
+        string CadenaConexion = MasterPage.CadenaConexion;
+        string NroHoja;
+        string RutCliente;
+        DateTime Fecha;
+        string TipoEquipo;
+        string Venta;
+        String Tecnico;
+        string CodigoEstado;
+        string Usuario;
+        int CodigoHardware;
+        string Serie;
+        string Marca;
+        string Modelo;
+        string Observacion;
+        string Numero;
+        int Contador;
+
+
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                Session["NroDetalle"] = 1;
+                //DateTime localDate = DateTime.Now;
+                //Calendar1.SelectedDate = localDate;
+                txt_fecha.Attributes.Add("readonly", "readonly");
+                txt_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                DataTable Hardware1 = new DataTable();
+
+                Hardware1 = PreparaAcceso.BuscaParametrosPorTabla(Codigo_TablasPadres.CodTipoHardware, CadenaConexion);
+                DropHardware.DataSource = Hardware1;
+                DropHardware.DataValueField = "par_cod_par";
+                DropHardware.DataTextField = "par_des_par";
+                DropHardware.DataBind();
+                DropHardware.SelectedValue = "-1";
+
+                DataTable rutcliente = new DataTable();
+
+                rutcliente = PreparaAcceso.BuscarRutNomClientes(CadenaConexion);
+                DropRutCliente.DataSource = rutcliente;
+                DropRutCliente.DataValueField = "cli_rut_cli";
+                DropRutCliente.DataTextField = "cli_nom_cli";
+                DropRutCliente.DataBind();
+                DropRutCliente.SelectedValue = "-1";
+
+                DataTable IdTecnico = new DataTable();
+
+                IdTecnico = PreparaAcceso.BuscarIdeNomTecnicos(CadenaConexion);
+                DropTecnico.DataSource = IdTecnico;
+                DropTecnico.DataValueField = "tec_rut_tec";
+                DropTecnico.DataTextField = "tec_Ide_tec";
+                DropTecnico.DataBind();
+                DropTecnico.SelectedValue = "-1";
+
+                //Prueba Andres
+                DataTable TipoEquipo = new DataTable();
+
+                TipoEquipo = PreparaAcceso.BuscaParametrosPorTabla(Codigo_TablasPadres.CodTipoEquipo, CadenaConexion);
+                DropTipoEquipo.DataSource = TipoEquipo;
+                DropTipoEquipo.DataValueField = "PAR_COD_PAR";
+                DropTipoEquipo.DataTextField = "PAR_DES_PAR";
+                DropTipoEquipo.DataBind();
+                DropTipoEquipo.SelectedValue = "-1";
+                //Fin Prueba Andres
+
+                DataTable lector = new DataTable();
+                lector = PreparaAcceso.BuscarNroEnsamble(CadenaConexion);
+                NroHoja = lector.Rows[0][0].ToString();
+
+                this.txtNhoja.Text = NroHoja;
+                txtNhoja.Enabled = false;
+                this.txtNumero.Text = Session["NroDetalle"].ToString();
+                txtNumero.Enabled = false;
+
+                DataTable DT = new DataTable();
+                DT.Columns.Add("Numero", Type.GetType("System.String"));
+                DT.Columns.Add("Hardware", Type.GetType("System.String"));
+                DT.Columns.Add("Marca", Type.GetType("System.String"));
+                DT.Columns.Add("Modelo", Type.GetType("System.String"));
+                DT.Columns.Add("Serie", Type.GetType("System.String"));
+                DT.Columns.Add("Comentarios", Type.GetType("System.String"));
+
+                //Guardamos la información en una variable de sesión
+                Session["DT"] = DT;
+
+                //Asignamos el DT al gridview (en este momento el DT esta vacio
+                dgvDetalle.DataSource = DT;
+                dgvDetalle.DataBind();
+            }
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Volver_Click(object sender, EventArgs e)
+        {
+            PreparaAcceso.CancelarNroEnsamble(CadenaConexion);
+            Response.Redirect("/Mantencion/Ensambles.aspx");
+        }
+
+        protected void GuardarEnsamble_Click(object sender, EventArgs e)
+        {
+            if (DropRutCliente.SelectedValue != "-1" & DropTecnico.SelectedValue != "-1")
+            {
+                TipoEquipo = DropTipoEquipo.SelectedValue;
+                //TipoEquipo = txtEquipo.Text;
+                NroHoja = txtNhoja.Text;
+                Venta = txtVenta.Text;
+                CodigoEstado = "1";
+                Usuario = Session["NomUsuario"].ToString();
+                Fecha = Convert.ToDateTime(txt_fecha.Text);
+                //Fecha = Calendar1.SelectedDate;
+                RutCliente = DropRutCliente.SelectedValue;
+                Tecnico = DropTecnico.SelectedValue;
+
+
+
+                string[] array = new string[] { TipoEquipo, Venta, Convert.ToString(Fecha), Usuario };
+
+                if (PreparaAcceso.funsionValFormVacios(array))
+                {
+                    if (dgvDetalle.Rows.Count > 0)
+                    {
+                        PreparaAcceso.IngresaEnsambleCabecera(Convert.ToDecimal(NroHoja), Convert.ToDecimal(RutCliente), Fecha, Convert.ToInt32(TipoEquipo), Venta, Tecnico, Convert.ToInt32(CodigoEstado), Usuario, CadenaConexion);
+                        for (int i = 0; i < dgvDetalle.Rows.Count; i++)
+                        {
+                            Numero = dgvDetalle.Rows[i].Cells[0].Text;
+                            DataTable lector1 = new DataTable();
+                            lector1 = PreparaAcceso.BuscaCodigoParametrosPorNombre(dgvDetalle.Rows[i].Cells[1].Text, CadenaConexion);
+                            CodigoHardware = Convert.ToInt32(lector1.Rows[0][0].ToString());
+                            Serie = dgvDetalle.Rows[i].Cells[2].Text;
+                            Marca = dgvDetalle.Rows[i].Cells[3].Text;
+                            Modelo = dgvDetalle.Rows[i].Cells[4].Text;
+                            Observacion = dgvDetalle.Rows[i].Cells[5].Text;
+
+                            PreparaAcceso.InsertarEnsambleDetalle(Convert.ToDecimal(txtNhoja.Text), Convert.ToInt32(Numero), CodigoHardware, Serie, Marca, Modelo, Observacion, CadenaConexion);
+                        }
+                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "<SCRIPT LANGUAGE='javascript'> alert('El Ensamble fue ingresado Correctamente!');</SCRIPT>");
+                        Response.Redirect("/Mantencion/Ensambles.aspx");
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "<SCRIPT LANGUAGE='javascript'> alert('No se ha ingresado Detalles a la Hoja de Ensamble!');</SCRIPT>");
+                    }
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "Alert", "<SCRIPT LANGUAGE='javascript'> alert('Complete Los Campos Que Estan vacios!');</SCRIPT>");
+                }
+            }
+            else if (DropRutCliente.SelectedValue == "-1" & DropTecnico.SelectedValue != "-1")
+            {
+                Response.Write("<script >alert('Verifique Seleccion de Cliente');</script>");
+            }
+            else if (DropRutCliente.SelectedValue != "-1" & DropTecnico.SelectedValue == "-1")
+            {
+                Response.Write("<script >alert('Verifique Seleccion de Tecnico');</script>");
+            }
+            else
+            {
+                Response.Write("<script >alert('Verifique Seleccion de Cliente y Tecnico ');</script>");
+            }
+
+
+        }
+        protected void AgregarDetalle_Click(object sender, EventArgs e)
+        {
+            if (DropHardware.SelectedValue != "-1")
+            {
+                Contador = Convert.ToInt16(Session["NroDetalle"]);
+                //Leemos la información
+                string strNumero = txtNumero.Text;
+                string strHardware = DropHardware.SelectedItem.ToString();
+
+                string strMarca = txtMarca.Text;
+                string strModelo = txtModelo.Text;
+                string strSerie = txtSerie.Text;
+                string strComentario = txtObservaciones.Text;
+
+                string[] array1 = new string[] { strMarca, strModelo, strSerie, strComentario };
+
+                if (PreparaAcceso.funsionValFormVacios(array1))
+                {
+                    //Leemos el datatable
+                    DataTable DT = new DataTable();
+                    DT = (DataTable)Session["DT"];
+
+                    //Insertamos el registro
+                    DT.Rows.Add(strNumero, strHardware, strMarca, strModelo, strSerie, strComentario);
+
+                    //Asignamos del DT al gridview
+                    dgvDetalle.DataSource = DT;
+                    dgvDetalle.DataBind();
+
+                    //Actualizamos el DT de la variable de sessión
+                    Session["DT"] = DT;
+
+
+                    Contador++;
+                    Session["NroDetalle"] = Contador;
+
+                    //Limpiamos la pantalla
+                    txtNumero.Text = Session["NroDetalle"].ToString();
+                    txtNumero.Enabled = false;
+                    DropHardware.SelectedValue = "-1";
+                    txtMarca.Text = "";
+                    txtModelo.Text = "";
+                    txtSerie.Text = "";
+                    txtObservaciones.Text = "";
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "Alert", "<SCRIPT LANGUAGE='javascript'> alert('Complete Los Campos Que Estan vacios!');</SCRIPT>");
+                }
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "Alert", "<SCRIPT LANGUAGE='javascript'> alert('Verifique Seleccion de Hardware !');</SCRIPT>");
+            }
+        }
+    }
+}

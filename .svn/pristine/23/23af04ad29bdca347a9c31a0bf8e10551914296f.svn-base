@@ -1,0 +1,176 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Consultas.aspx.cs" Inherits="ControlArriendos.Consultas" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
+
+    <asp:Panel ID="PanelPrincipal" runat="server" Width="1042px" Height="140px">
+ 
+          
+   <div  align="center" style="width: 1700px">
+       <br />
+        <br />
+    <h2 class="Titulos">Consultas </h2>
+   <br />
+  <table >
+        <tr>
+             <td>
+                 <asp:Button ID="Button1" runat="server" Text="Consulta1" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" OnClick="Consulta1_Click" Width="91px" /></td>
+            <td></td>
+             <td>
+                 <asp:Button ID="Button2" runat="server" Text="Consulta2" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" OnClick="Consulta2_Click" Width="91px" /></td>
+             <td></td>
+            <td>
+                 <asp:Button ID="Button3" runat="server" Text="Consulta3" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" OnClick="Consulta3_Click" Width="91px" /></td>
+        </tr>
+     </table> 
+            
+     </div>
+        
+        <br />
+        <br />
+  </body> 
+ </asp:Panel> 
+
+        <asp:Panel ID="PanelConsulta1" runat="server"  Width="1029px" Height="118px" >
+         
+        <div class="div" align="center">
+        <table class="tabla3">
+                  <tr>
+                          <td>
+                              <asp:Label ID="lblFecha" runat="server" Text="Fecha Ingreso"></asp:Label></td>
+                          <td>
+                              <asp:TextBox ID="txtFecha" runat="server"></asp:TextBox></td>                    
+                     </tr>  
+                  <tr>    
+                      <td>
+                          <asp:Label ID="lblEstado" runat="server" Text="Estado"></asp:Label></td> 
+                      <td>
+                          <asp:DropDownList ID="DropEstado" runat="server" Width="122px"></asp:DropDownList></td>      
+                    </tr>
+                    <tr>    
+                      <td>
+                          <asp:Label ID="lblTipo" runat="server" Text="Tipo de Equipo"></asp:Label></td> 
+                      <td>
+                          <asp:DropDownList ID="DropEquipo" runat="server" Width="122px"></asp:DropDownList></td> 
+                             <td></td>
+                        <td>
+                            <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="BotonRojo" /></td>
+                    </tr>
+          </table>
+
+            <asp:GridView ID="GrillaConsulta" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#D8D8D8" AlternatingRowStyle-BackColor="#FA8258" HeaderStyle-BackColor="#6E6E6E" HeaderStyle-Font-Bold="true" HeaderStyle-ForeColor="White" ShowFooter="True"  Width="750px" Style="margin-bottom: 0px" HorizontalAlign="Center" AllowPaging="True" PageSize="7" AllowSorting="True" OnPageIndexChanging="GrillaConsulta_PageIndexChanging" OnSelectedIndexChanged="GrillaConsulta_SelectedIndexChanged">
+
+                <Columns>
+                    <asp:TemplateField HeaderText="Nro Guia">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("gce_nro_gce")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Cliente">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("cli_nom_cli")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Nom Usuario">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox3" runat="server" ></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label3" runat="server" Text='<%# Eval("gce_nom_usu")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Nom Equipo">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("gce_nom_eqp")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Usu Responsable">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("gce_usr_gce")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Sucursal">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("par_des_par")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Estado">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("par_des_par")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Fecha Ingreso">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label8" runat="server" Text='<%# Eval("gce_fec_gce")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Tipo Equipo">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label9" runat="server" Text='<%# Eval("par_des_par")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+
+                <EditRowStyle HorizontalAlign="Center" Width="100px" />
+                    <HeaderStyle BackColor="#FF3300" Font-Bold="True" ForeColor="White"></HeaderStyle>
+                    <RowStyle BackColor="White" HorizontalAlign="Center" VerticalAlign="Middle" Width="100px" Height="30px"></RowStyle>
+                <EmptyDataTemplate>
+                        <center>
+                            
+        </center>
+                    </EmptyDataTemplate>
+            </asp:GridView>
+          </div>
+    </asp:Panel>
+
+        <asp:Panel ID="PanelConsulta2" runat="server" Width="1032px" Height="133px"  >
+
+            <br />
+        <table class="tabla3">
+                   
+                    <tr>
+                          <td></td>
+                          <td></td>
+                     </tr> 
+          </table>
+    </asp:Panel>
+    <asp:Panel ID="PanelConsulta3" runat="server" Width="1039px" Height="140px" >
+
+            <br />
+        <table class="tabla3">
+                   
+                    <tr>
+                          <td></td>
+                          <td></td>
+                     </tr> 
+          </table>
+    </asp:Panel>
+   </asp:Content>
+
+
+
+
+

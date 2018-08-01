@@ -1,0 +1,122 @@
+﻿using Negocios;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace ControlArriendos
+{
+    public partial class Ensambles : System.Web.UI.Page
+    {
+        Decimal Rut;
+        string Fecha;
+        string CadenaConexion = MasterPage.CadenaConexion;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                BuscarListaEnsamble();
+                GridView1.Visible = true;
+                PanelMsje.Visible = false;
+            }
+        }
+
+        public void BuscarListaEnsamble()
+        {
+            GridView1.DataSource = PreparaAcceso.LLenarListaEnsamble(CadenaConexion);
+            GridView1.DataBind();
+        }
+
+        protected void BuscarEnsamble_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtRut.Text) & String.IsNullOrEmpty(txtFecha.Text))
+            {
+                PanelMsje.Visible = true;
+                txtRut.Focus();
+                return;
+            }
+            else if (String.IsNullOrEmpty(txtRut.Text))
+            {
+                Rut = 0;
+                Fecha = txtFecha.Text;
+                txtFecha.Focus();
+
+
+            }
+            else if (String.IsNullOrEmpty(txtFecha.Text))
+            {
+
+                Rut = Convert.ToDecimal(txtRut.Text);
+                Fecha = "";
+
+            }
+            else if (txtRut.Text != null & txtFecha.Text != null)
+            {
+                Fecha = txtFecha.Text;
+                Rut = Convert.ToDecimal(txtRut.Text);
+                DataTable BuscarEnsamble = new DataTable();
+                BuscarEnsamble = PreparaAcceso.BuscarEnsamblePorRutFecha(Rut, Fecha, CadenaConexion);
+                GridView1.DataSource = BuscarEnsamble;
+                GridView1.DataBind();
+            }
+
+            DataTable Buscar = new DataTable();
+            Buscar = PreparaAcceso.BuscarEnsamblePorRutFecha(Rut, Fecha, CadenaConexion);
+            GridView1.DataSource = Buscar;
+            GridView1.DataBind();
+        }
+        protected void GVEnsambles_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.GridView1.PageIndex = e.NewPageIndex;
+            BuscarListaEnsamble();
+        }
+
+        protected void GVEnsambles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void NuevoEnsamble_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Mantencion/NuevoEnsamble.aspx");
+        }
+
+        protected void InformeEnsamble_Click(object sender, ImageClickEventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtRut.Text) & String.IsNullOrEmpty(txtFecha.Text))
+            {
+                Session["RutCliente"] = Rut;
+                Session["Fecha"] = Fecha;
+                Response.Redirect("~/Mantencion/Informes/InformeEnsambles.aspx");
+            }
+            else if (String.IsNullOrEmpty(txtRut.Text))
+            {
+                Rut = 0;
+                Fecha = txtFecha.Text;
+                txtFecha.Focus();
+
+            }
+            else if (String.IsNullOrEmpty(txtFecha.Text))
+            {
+
+                Rut = Convert.ToDecimal(txtRut.Text);
+                Fecha = "";
+
+            }
+            else if (txtRut.Text != null & txtFecha.Text != null)
+            {
+                Session["RutCliente"] = Convert.ToDecimal(txtRut.Text);
+                Session["Fecha"] = txtFecha.Text;
+                Response.Redirect("~/Mantencion/Informes/InformeEnsambles.aspx");
+            }
+
+            Session["RutCliente"] = Rut;
+            Session["Fecha"] = Fecha;
+            Response.Redirect("~/Mantencion/Informes/InformeEnsambles.aspx");
+        }
+    }
+}

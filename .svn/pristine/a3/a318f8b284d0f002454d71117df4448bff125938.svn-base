@@ -1,0 +1,19 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Devoluciones.aspx.cs" Inherits="ControlArriendos.Devoluciones" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+<body>
+    <div  align="center" style="width: 1700px">
+       <br />
+        <br />
+     <h2 class="Titulos">Ingreso Devoluciones </h2>
+       <br />
+        <!-- Aqui poner código página ingreso Devoluciones-->
+   
+     </div>
+     <br />
+     <br />
+    
+</body>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+</asp:Content>

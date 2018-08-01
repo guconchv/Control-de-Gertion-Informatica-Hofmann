@@ -1,0 +1,74 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Consultas.aspx.cs" Inherits="ControlArriendos.Consultas" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server" >
+
+    <asp:Panel ID="PanelPrincipal" runat="server" Width="1042px" Height="140px">
+ 
+          
+   <div  align="center" style="width: 1700px">
+       <br />
+        <br />
+    <h2 class="Titulos">Consultas </h2>
+   <br />
+  <table class="tabla3">
+        <tr>
+             <td>
+                 <asp:Button ID="Button1" runat="server" Text="Consulta1" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" Width="91px" /></td>
+            <td></td>
+             <td>
+                 <asp:Button ID="Button2" runat="server" Text="Consulta2" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" Width="91px" /></td>
+             <td></td>
+            <td>
+                 <asp:Button ID="Button3" runat="server" Text="Consulta3" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" Width="91px" /></td>
+        </tr>
+     </table> 
+            
+     </div>
+        
+        <br />
+        <br />
+  </body> 
+ </asp:Panel> 
+
+        <asp:Panel ID="PanelConsulta1" runat="server"  Width="1029px" Height="118px" >
+         
+        <div class="div">
+        <table class="tabla3">
+                  <tr>
+                          <td></td>
+                          <td></td>
+                          
+                     </tr>                  
+             
+          </table>
+          </div>
+    </asp:Panel>
+
+        <asp:Panel ID="PanelConsulta2" runat="server" Width="1032px" Height="133px"  >
+
+            <br />
+        <table class="tabla3">
+                   
+                    <tr>
+                          <td></td>
+                          <td></td>
+                     </tr> 
+          </table>
+    </asp:Panel>
+    <asp:Panel ID="PanelConsulta3" runat="server" Width="1039px" Height="140px" >
+
+            <br />
+        <table class="tabla3">
+                   
+                    <tr>
+                          <td></td>
+                          <td></td>
+                     </tr> 
+          </table>
+    </asp:Panel>
+   </asp:Content>
+
+
+
+
+

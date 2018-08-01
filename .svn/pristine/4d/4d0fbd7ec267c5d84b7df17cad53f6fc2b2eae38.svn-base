@@ -1,0 +1,399 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Xml.Linq;
+//using System.Windows.forms;
+using System.Drawing;
+using System.Web.SessionState;
+using Negocios;
+using System.IO;
+using System.Text;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using Microsoft.Win32;
+using System.ComponentModel;
+using Presentacion;
+
+namespace ControlArriendos
+{
+    public partial class Parametros : System.Web.UI.Page
+    {
+        string cadenaConexion = MasterPage.CadenaConexion;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            if (!IsPostBack)
+            {
+                PanelNuevo.Visible = false;
+                MostrarEstado();
+                Paneltabla.Visible = false;
+                msjeprocedimiento.Visible = false;
+                PanelProcedimientos.Visible = false;
+                LlenaListaParametrosPadre();
+                LlenaGrillaParametros();
+
+            }
+        }
+
+        public void MostrarEstado()
+        {
+            //Busca los estados Activo y inactivo, luego los muestra en los 2 combos
+            DataTable BuscarEstado = new DataTable();
+            BuscarEstado = PreparaAcceso.BuscaParametrosPorTabla(Codigo_TablasPadres.codEstados, cadenaConexion);
+            DropEstado.DataSource = BuscarEstado;
+            DropEstado.DataTextField = "par_des_par";
+            DropEstado.DataValueField = "par_cod_par";
+            DropEstado.DataBind();
+            
+            dropestado2.DataSource = BuscarEstado;
+            dropestado2.DataTextField = "par_des_par";
+            dropestado2.DataValueField = "par_cod_par";
+            dropestado2.DataBind();
+          
+        }
+        public void LlenaListaParametrosPadre()
+        {
+            DataTable DTParam = new DataTable();
+
+            DTParam = PreparaAcceso.BuscaParametrosPadre(cadenaConexion);
+            DpDesParametrosPadre.DataSource = DTParam;
+            DpDesParametrosPadre.DataValueField = "par_cod_par";
+            DpDesParametrosPadre.DataTextField = "par_des_par";
+            DpDesParametrosPadre.DataBind();
+            this.txtCodigo.Text = this.DpDesParametrosPadre.SelectedValue;
+            
+        }
+
+        public void LlenaGrillaParametros()
+        {
+            ;
+
+             //Extrae el indice de la seleccion del combo y lo muestra en textbox luego le pasa el valor del indice al objeto
+            txtCodigo.Text = DpDesParametrosPadre.SelectedValue;
+                Presentacion.Parametros Objeto = new Presentacion.Parametros();
+                Objeto.codigo = Convert.ToInt16(DpDesParametrosPadre.SelectedValue);
+                int codigo = Convert.ToInt16(txtCodigo.Text);
+                RefreshData();// Llama al metodo para llenar grilla
+
+        }
+        protected void DpDesParametrosPadre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LlenaGrillaParametros();
+        }
+      
+
+        protected void NuevaDescripcion_Click(object sender, EventArgs e)
+        {
+            PanelNuevo.Visible = true;
+            PanelPrincipal.Visible = false;
+            txtdescripcion.BackColor = Color.White;
+            Btnguardar_Tabla.Visible = true;
+            Session["opcion"] = 1;
+            lbltitulomodifica.Visible = false;
+            lbltitulo.Visible = true;
+            Image_editar.Visible = false;
+            img_nuevo.Visible = true;
+            MostrarEstado();
+            DropEstado.SelectedValue = "1";
+            DropEstado.Enabled = false;
+            int valor = 0;
+            limpiar();
+            codAux.Text = valor.ToString();
+        }
+
+        protected void ModificarDescripcion_Click(object sender, EventArgs e)
+        {
+            PanelNuevo.Visible = true;
+            PanelPrincipal.Visible = false;
+            MostrarEstado();
+            txtdescripcion.Text = DpDesParametrosPadre.SelectedItem.ToString();
+            Session["opcion"] = 2;
+            lbltitulo.Visible = false;
+            lbltitulomodifica.Visible = true;
+            img_nuevo.Visible = false;
+            Image_editar.Visible = true;
+            DropEstado.Enabled = true;
+
+            try
+            {
+                DataTable buscar = new DataTable();
+                int valor = Convert.ToInt16(txtCodigo.Text);
+                buscar = PreparaAcceso.BuscarDatosTabPar_Cod(valor, cadenaConexion);
+                codAux.Text = buscar.Rows[0][2].ToString();
+                codSis.Text = buscar.Rows[0][3].ToString();
+                int var = Convert.ToInt16(buscar.Rows[0][5].ToString());
+                MostrarEstado();
+                DropEstado.SelectedValue = Convert.ToString(var);
+
+            }
+            catch (Exception exp)
+            {
+                Response.Write(exp.Message);
+            }
+        }
+
+        protected void GVParametros_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.GVParametros.PageIndex = e.NewPageIndex;
+            LlenaGrillaParametros();
+        }
+
+        protected void GVParametros_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void ActualizarRegistro(object sender, GridViewEditEventArgs e)
+        {
+            GVParametros.EditIndex = e.NewEditIndex;
+
+            LlenaGrillaParametros();
+
+
+            DropDownList combo = GVParametros.Rows[e.NewEditIndex].FindControl("DropEstado") as DropDownList;
+            DataTable BuscarEstado = new DataTable();
+            BuscarEstado = PreparaAcceso.BuscaParametrosPorTabla(Codigo_TablasPadres.codEstados, cadenaConexion);
+            
+            combo.DataSource = BuscarEstado;
+            combo.DataTextField = "par_des_par";
+            combo.DataValueField = "par_cod_par";
+            combo.DataBind();
+            
+            Label lblEst = GVParametros.Rows[e.NewEditIndex].FindControl("lblEst") as Label;
+            combo.SelectedValue = lblEst.Text;
+        }
+        protected void limpiar()
+        {
+
+            PanelProcedimiento.Visible = false;
+            msjeprocedimiento.Visible = false;
+            txtdescripcion.Text = "";
+            codAux.Text = "";
+
+        }  
+
+        protected void Update_Registro(object sender, GridViewUpdateEventArgs e)
+        {
+
+            try
+            {
+                Label lblDes = GVParametros.Rows[e.RowIndex].FindControl("lblDesc") as Label;
+                string validarDes = lblDes.Text;
+                string validarDesN = Convert.ToString((((System.Web.UI.WebControls.TextBox)GVParametros.Rows[e.RowIndex].Cells[1].Controls[1]).Text));
+                
+                string validarEstado = Convert.ToString((((System.Web.UI.WebControls.DropDownList)GVParametros.Rows[e.RowIndex].Cells[4].Controls[1]).Text));
+                if (PreparaAcceso.Buscar_DescripcionDeTabPar(Convert.ToInt16(txtCodigo.Text), validarDesN, cadenaConexion) && validarDes != validarDesN)
+                {
+               
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Sr.Usuario", "alert('La descripción ya existe');", true); return;
+
+
+                } 
+                else if (validarDesN.Length == 0)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Sr.Usuario", "alert('Debe ingresar la descripción');", true); return;
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "Alert", "<SCRIPT LANGUAGE='javascript'> alert('Parametro actualizado correctamente!!.');  document.location=('/Mantencion/Parametros.aspx');</SCRIPT>");
+                    Tabla_parametros Obj = new Tabla_parametros();
+
+                    int codigo = Convert.ToInt16(this.txtCodigo.Text);
+                    Obj.CodPar = codigo;
+                    Obj.codigo = Convert.ToInt16(((System.Web.UI.WebControls.Label)GVParametros.Rows[e.RowIndex].Cells[0].Controls[1]).Text);
+                    Obj.CodDescrip = Convert.ToString(((System.Web.UI.WebControls.TextBox)GVParametros.Rows[e.RowIndex].Cells[1].Controls[1]).Text.ToUpper());
+                    Obj.CodAux = Convert.ToString(((System.Web.UI.WebControls.TextBox)GVParametros.Rows[e.RowIndex].Cells[2].Controls[1]).Text);
+                    Obj.CdoEstado = Convert.ToInt32(((System.Web.UI.WebControls.DropDownList)GVParametros.Rows[e.RowIndex].Cells[4].Controls[1]).Text);
+                    Obj.CodSis = Convert.ToInt32(((System.Web.UI.WebControls.TextBox)GVParametros.Rows[e.RowIndex].Cells[3].Controls[1]).Text);
+                    DataTable ActualizaDetalle = new DataTable();
+                    ActualizaDetalle = PreparaAcceso.Modifica_Parametros(Obj.CodPar, Obj.codigo, Obj.CodDescrip, Obj.CdoEstado, Obj.CodSis ,Obj.CodAux, cadenaConexion);
+                    GVParametros.EditIndex = -1;
+                    LlenaGrillaParametros();
+                }
+            }
+            catch (Exception exp)
+            {
+                Response.Write(exp.Message);
+            }
+
+        }
+
+
+
+        protected void CancelarRegistro(object sender, GridViewCancelEditEventArgs e)
+        {
+            GVParametros.EditIndex = -1;
+            RefreshData();
+        }
+
+        public void RefreshData()
+        {
+            int codigo = Convert.ToInt16(txtCodigo.Text);//Este es el indice y se utiliza como parametro
+            try
+            {
+                //Con el parametro de codigo consulta en la BD y devuelve una lista de campos los cuales los muestra en la Gridview
+                GVParametros.DataSource = PreparaAcceso.BuscaListaParmetrosInfCompletaPorCodigo(codigo, cadenaConexion);
+                GVParametros.DataBind();
+            }
+            catch (Exception exp)
+            {
+                Response.Write(exp.Message);
+            }
+        }
+
+        protected void BtnCancelar(object sender, EventArgs e)
+        {
+            PanelNuevo.Visible = false;
+            PanelPrincipal.Visible = true;
+            msjeprocedimiento.Visible = false;
+            PanelProcedimiento.Visible = false;
+            PanelProcedimientos.Visible = false;
+            Paneltabla.Visible = false;
+            RegularExpressionValidator1.Visible = false;
+            limpiar();
+        }
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            PanelNuevo.Visible = true;
+            PanelPrincipal.Visible = false;
+            txtdescripcion.Text = DpDesParametrosPadre.SelectedItem.ToString();
+        }
+
+
+        protected void NuevoParametro_Click(object sender, EventArgs e)
+        {
+            PanelPrincipal.Visible = false;
+            PanelNuevo.Visible = false;
+            txtabla.Text = DpDesParametrosPadre.SelectedItem.ToString();
+            PanelProcedimientos.Visible = true;
+            panel3.Visible = false;
+            BtnNuevo_param.Visible = true;
+            Panelmensaje.Visible = false;
+            dropestado2.SelectedValue = "1";
+            dropestado2.Enabled = false;
+        }
+
+        protected void BtnInforme_Click(object sender, ImageClickEventArgs e)
+        {
+            Session["Codigo"] = txtCodigo.Text;
+            Response.Redirect("Informes/InformeParametros.aspx");
+        }
+
+    
+
+        protected void DpDesParametrosPadre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void EnviarDatos(object sender, EventArgs e)
+        {
+            string validarDescrip = this.txtdescripcion.Text.Trim();
+
+            if (codAux.Text.Length == 0 & codSis.Text.Length == 0)
+            {
+
+                Paneltabla.Visible = true;
+
+            }
+            else if (validarDescrip.Length == 0)
+            {
+
+                Paneltabla.Visible = true;
+            }
+            else
+            {
+                Tabla_parametros Obj = new Tabla_parametros();
+                int codigo = Convert.ToInt16(this.txtCodigo.Text);
+                Tabla_parametros obj = new Tabla_parametros();
+                obj.CodDescrip = Convert.ToString(this.txtdescripcion.Text).ToUpper();
+                obj.CdoEstado = Convert.ToInt16(DropEstado.SelectedValue);
+                obj.CodAux = codAux.Text;
+                obj.CodSis = Convert.ToInt32(codSis.Text);
+               
+                
+
+                int Op = Convert.ToInt16(Session["opcion"]);
+                switch (Op)
+                {
+                    case 1:
+                        //verifica si la descripcion ya existe en la base de datos
+                        if (PreparaAcceso.Buscar_Descripcion(obj.CodDescrip, cadenaConexion))
+                        {
+                            msjeprocedimiento.Visible = true;
+                            txtdescripcion.Focus();
+                            txtdescripcion.BackColor = Color.LightCyan;
+                        }
+                        else
+                        {
+                            DataTable GuardarTabla = new DataTable();
+                            GuardarTabla = PreparaAcceso.Crear_DescripPar(obj.CodDescrip, obj.CdoEstado, obj.CodSis, obj.CodAux, cadenaConexion);
+                            ClientScript.RegisterStartupScript(this.GetType(), "Alert", "<SCRIPT LANGUAGE='javascript'> alert('Tabla ingresada correctamente!!.');  document.location=('/Mantencion/Parametros.aspx');</SCRIPT>");
+                        }
+                        break;
+
+                    case 2:
+                        
+                        DataTable ModificarTabla = new DataTable();
+                        ModificarTabla = PreparaAcceso.Modificar_Descripcion(codigo, obj.CodDescrip, obj.CdoEstado, obj.CodSis, obj.CodAux, cadenaConexion);
+                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "<SCRIPT LANGUAGE='javascript'> alert('Tabla se ha modificado!!.');  document.location=('/Mantencion/Parametros.aspx');</SCRIPT>");
+                        break;
+                }
+            }
+        }
+
+        protected void BtnNuevo_param_Click(object sender, EventArgs e)
+        {
+
+            string validacion1 = this.txtdescrip.Text.Trim();
+
+            if (codaux2.Text.Length == 0 & codSis2.Text.Length == 0)
+            {
+
+                Paneltabla.Visible = true;
+
+            }
+            else if (validacion1.Length == 0)
+            {
+                Panelmensaje.Visible = true;
+            }
+            else
+            {
+                Tabla_parametros Obj = new Tabla_parametros();
+                Tabla_parametros obj = new Tabla_parametros();
+                obj.CodPar = Convert.ToInt16(DpDesParametrosPadre.SelectedValue);
+                obj.CodDescrip = Convert.ToString(this.txtdescrip.Text).ToUpper();
+                obj.CdoEstado = 1;
+                obj.CodAux = this.codaux2.Text;
+                obj.CodSis = obj.CodSis = Convert.ToInt32(codSis2.Text);
+
+                //verificacion si la descripcion ya existe en la base de datos
+                if (PreparaAcceso.Buscar_Descripcion(obj.CodDescrip, cadenaConexion))
+                {
+                    panel3.Visible = true;
+                    txtdescripcion.Focus();
+                    txtdescripcion.BackColor = Color.LightCyan;
+
+                }
+                else
+                {
+                    //Guarda  
+                    DataTable GuardarParametro = new DataTable();
+                    GuardarParametro = PreparaAcceso.Crear_ParametroNuevo(obj.CodPar, obj.CodDescrip, obj.CdoEstado, obj.CodSis, obj.CodAux, cadenaConexion);
+                    ClientScript.RegisterStartupScript(this.GetType(), "Alert", "<SCRIPT LANGUAGE='javascript'> alert('Parametro ingresado correctamente!!.');  document.location=('/Mantencion/Parametros.aspx');</SCRIPT>");
+                }
+            }
+        }
+        
+       
+    }
+}

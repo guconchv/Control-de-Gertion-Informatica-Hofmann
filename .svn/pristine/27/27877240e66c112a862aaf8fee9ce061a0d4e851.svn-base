@@ -1,0 +1,93 @@
+﻿using Negocios;
+using Presentacion;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace ControlArriendos
+{
+    public partial class Consultas : System.Web.UI.Page
+    {
+        string cadenaConexion = MasterPage.CadenaConexion;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                LLenaGrilla();
+                LlenaDropDownList();
+                PanelPrincipal.Visible = true;
+                PanelConsulta1.Visible = true;
+                PanelConsulta2.Visible = false;
+                PanelConsulta3.Visible = false;
+                
+                
+
+            }
+        }
+
+        public void LlenaDropDownList()
+        {
+            DataTable estado = new DataTable();
+
+            estado = PreparaAcceso.BuscaParametrosPorTabla(Codigo_TablasPadres.CodEstadosGuias, cadenaConexion);
+
+            DropEstado.DataSource = estado;
+            DropEstado.DataValueField = "PAR_COD_PAR";
+            DropEstado.DataTextField = "PAR_DES_PAR";
+            DropEstado.DataBind();
+
+            DataTable TipoEquipo = new DataTable();
+
+            TipoEquipo = PreparaAcceso.BuscaParametrosPorTabla(Codigo_TablasPadres.CodTipoEquipo, cadenaConexion);
+
+            DropEquipo.DataSource = TipoEquipo;
+            DropEquipo.DataValueField = "PAR_COD_PAR";
+            DropEquipo.DataTextField = "PAR_DES_PAR";
+            DropEquipo.DataBind();
+
+        }
+        public void LLenaGrilla()
+        {
+            GrillaConsulta.DataSource = PreparaAcceso.LLenarConsultaGuia(cadenaConexion);
+            GrillaConsulta.DataBind();
+
+        }
+
+
+        protected void Consulta1_Click(object sender, EventArgs e)
+        {
+            PanelConsulta1.Visible = true;
+            PanelConsulta2.Visible = false;
+            PanelConsulta3.Visible = false;
+        }
+
+        protected void Consulta2_Click(object sender, EventArgs e)
+        {
+            PanelConsulta1.Visible = false;
+            PanelConsulta2.Visible = true;
+            PanelConsulta3.Visible = false;
+        }
+
+        protected void Consulta3_Click(object sender, EventArgs e)
+        {
+            PanelConsulta1.Visible = false;
+            PanelConsulta2.Visible = false;
+            PanelConsulta3.Visible = true;
+        }
+        protected void GrillaConsulta_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.GrillaConsulta.PageIndex = e.NewPageIndex;
+            LLenaGrilla();
+        }
+
+        protected void GrillaConsulta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

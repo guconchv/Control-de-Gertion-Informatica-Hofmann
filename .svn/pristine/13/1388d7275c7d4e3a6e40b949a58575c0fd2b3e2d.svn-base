@@ -1,0 +1,31 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Consultas.aspx.cs" Inherits="ControlArriendos.Consultas" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+<asp:panel ID="PanelPrincipal" runat="server" Height="158px">
+
+
+       <br />
+        <br />
+     <h2 class="Titulos">Consultas </h2>
+
+     <br />
+    <table align="center">
+        <tr >
+             <td><asp:Button ID="Button1" runat="server" Text="Consulta1" BackColor="#CCFF99" BorderColor="Black" BorderStyle="None" ForeColor="Blue" /></td>
+             <td><asp:Button ID="Button2" runat="server" Text="Consulta2" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" /></td>
+             <td><asp:Button ID="Button3" runat="server" Text="Consulta3" BackColor="#CCFF99" BorderStyle="None" Font-Underline="False" ForeColor="Blue" /></td>
+        </tr>
+    </asp:panel>
+<asp:panel ID="Panel1" runat="server" Height="152px">
+
+</asp:panel>   
+
+<asp:panel ID="Panel2" runat="server" Height="152px">
+
+</asp:panel>  
+<asp:panel ID="Panel3" runat="server" Height="152px">
+
+</asp:panel> 
+
+</asp:Content>
+

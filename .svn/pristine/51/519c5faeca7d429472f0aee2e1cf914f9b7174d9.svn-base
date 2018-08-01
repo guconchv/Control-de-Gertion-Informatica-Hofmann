@@ -1,0 +1,129 @@
+﻿using Negocios;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace ControlArriendos
+{
+    public partial class Clientes : System.Web.UI.Page
+    {
+        Decimal Rut;
+        string Nombre;
+        string CadenaConexion = MasterPage.CadenaConexion;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+            if (!IsPostBack)
+            {
+                BuscarListaCliente();
+                GridP.Visible = true;
+                PanelMsje.Visible = false;
+            }
+        }
+
+        //------LLeno la grilla con dependiendo el codigo de sucursal
+        public void BuscarListaCliente()
+        {
+            GridP.DataSource = PreparaAcceso.LLenarListaCliente(CadenaConexion);
+            GridP.DataBind();
+        }
+
+        //------Redireccionamiento a modulos de empleados por rut
+        protected void BuscarCliente_Click(object sender, EventArgs e)
+        {
+
+            if (String.IsNullOrEmpty(txtRut.Text) & String.IsNullOrEmpty(txtNombre.Text))
+            {
+                PanelMsje.Visible = true;
+                txtRut.Focus();
+                return;
+            }
+            else if (String.IsNullOrEmpty(txtRut.Text))
+            {
+                Rut = 0;
+                Nombre = txtNombre.Text;
+                txtNombre.Focus();
+
+
+            }
+            else if (String.IsNullOrEmpty(txtNombre.Text))
+            {
+
+                Rut = Convert.ToDecimal(txtRut.Text);
+                Nombre = "";
+
+            }
+            else if (txtRut.Text != null & txtNombre.Text != null)
+            {
+                Nombre = txtNombre.Text;
+                Rut = Convert.ToDecimal(txtRut.Text);
+                DataTable BuscarCliente = new DataTable();
+                BuscarCliente = PreparaAcceso.BuscarCliente(Rut, Nombre, CadenaConexion);
+                GridP.DataSource = BuscarCliente;
+                GridP.DataBind();
+            }
+
+            DataTable Buscar = new DataTable();
+            Buscar = PreparaAcceso.BuscarCliente(Rut, Nombre, CadenaConexion);
+            GridP.DataSource = Buscar;
+            GridP.DataBind();
+        }
+
+        ///-----Paginacón de la grilla
+        protected void GridP_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            this.GridP.PageIndex = e.NewPageIndex;
+            BuscarListaCliente();
+        }
+
+        //------Exportar el Informe de Clientes
+        protected void LLenarInforme_Click(object sender, ImageClickEventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtRut.Text) & String.IsNullOrEmpty(txtNombre.Text))
+            {
+                Session["RutCliente"] = Rut;
+                Session["NombreCliente"] = Nombre;
+                Response.Redirect("~/Mantencion/Informes/Informe_Cliente.aspx");
+            }
+            else if (String.IsNullOrEmpty(txtRut.Text))
+            {
+                Rut = 0;
+                Nombre = txtNombre.Text;
+                txtNombre.Focus();
+
+            }
+            else if (String.IsNullOrEmpty(txtNombre.Text))
+            {
+
+                Rut = Convert.ToDecimal(txtRut.Text);
+                Nombre = "";
+
+            }
+            else if (txtRut.Text != null & txtNombre.Text != null)
+            {
+                Session["RutCliente"] = Convert.ToDecimal(txtRut.Text);
+                Session["NombreCliente"] = txtNombre.Text;
+                Response.Redirect("~/Mantencion/Informes/Informe_Cliente.aspx");
+            }
+
+            Session["RutCliente"]= Rut;
+            Session["NombreCliente"] = Nombre;
+            Response.Redirect("~/Mantencion/Informes/Informe_Cliente.aspx");
+        }
+
+        protected void GridP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void NuevoCliente_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/Mantencion/NuevoCliente.aspx");
+        }
+    }
+}

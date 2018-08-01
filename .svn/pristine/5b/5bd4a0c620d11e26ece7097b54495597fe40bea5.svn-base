@@ -1,0 +1,24 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Consultas.aspx.cs" Inherits="ControlArriendos.Consultas" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<head >
+    <title></title>
+    	
+</head>
+<body>
+
+    <div  align="center" style="width: 1700px">
+       <br />
+        <br />
+     <h2 class="Titulos">Consultas </h2>
+       <br />
+        <!-- Aqui poner codigo página Consultas-->
+   
+     </div>
+     <br />
+     <br />
+    
+</body>
+        
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
