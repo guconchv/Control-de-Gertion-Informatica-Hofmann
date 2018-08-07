@@ -604,24 +604,30 @@ namespace Datos
             _comando.Connection.Close();
             return _comando;
         }
-        public static SqlCommand AgregarRegistroEquipos(string rut_per,string nomb_per, string telefono, string departamento, string correo, DateTime ingreso,
-            string tipo, string soporte, int licencia_off, int licencia_win, string equipo, string hardware, string marca, string modelo, string serie,
-            string comentarios, string CadenaConexion)
+
+        //******************DROGUERIA HOFMANN************************\\
+
+
+        public static SqlCommand RegistrarEquipos(int cod_equipo, string rut, string nombre, int anexo, int celular,
+            string departamento, string correo, DateTime fecha, string tecnico, string tipo, string licencia_off, string licencia_win,
+            int fact_relacionada, string hardware, string marca, string modelo, string serie, string comentarios, string CadenaConexion)
         {
             string _cadenaconexion = CadenaConexion;
             SqlConnection _conexion = new SqlConnection(_cadenaconexion);
-            SqlCommand _comando = new SqlCommand("AgregarRegistroEquipo", _conexion);
-            _comando.Parameters.AddWithValue("@rut", rut_per);
-            _comando.Parameters.AddWithValue("@nombre", nomb_per);
-            _comando.Parameters.AddWithValue("@telefono",telefono);
+            SqlCommand _comando = new SqlCommand("DH_RegistroEquipos_GC", _conexion);
+            _comando.Parameters.AddWithValue("@equipo", cod_equipo);
+            _comando.Parameters.AddWithValue("@rut", rut);
+            _comando.Parameters.AddWithValue("@nombre",nombre);
+            _comando.Parameters.AddWithValue("@anexo", anexo);
+            _comando.Parameters.AddWithValue("@celular", celular);
             _comando.Parameters.AddWithValue("@departamento", departamento);
             _comando.Parameters.AddWithValue("@correo", correo);
-            _comando.Parameters.AddWithValue("@ingreso", ingreso);
+            _comando.Parameters.AddWithValue("@fecha", fecha);
+            _comando.Parameters.AddWithValue("@tecnico", tecnico);
             _comando.Parameters.AddWithValue("@tipo", tipo);
-            _comando.Parameters.AddWithValue("@soporte", soporte);
             _comando.Parameters.AddWithValue("@licencia_off", licencia_off);
             _comando.Parameters.AddWithValue("@licencia_win", licencia_win);
-            _comando.Parameters.AddWithValue("@cod_equipo", equipo);
+            _comando.Parameters.AddWithValue("@fact_relacionada", fact_relacionada);
             _comando.Parameters.AddWithValue("@hardware", hardware);
             _comando.Parameters.AddWithValue("@marca", marca);
             _comando.Parameters.AddWithValue("@modelo", modelo);
@@ -630,5 +636,18 @@ namespace Datos
             _comando.Connection.Close();
             return _comando;
         }
+
+        public static SqlCommand BuscarRegistroEquipos(int cod_equipo,string CadenaCnexion)
+        {
+            string _cadenaconexion = CadenaCnexion;
+            SqlConnection _conexion = new SqlConnection(_cadenaconexion);
+            SqlCommand _comando = new SqlCommand("DH_BuscarEquipo_GC", _conexion);
+            _comando.Parameters.AddWithValue("@codigo", cod_equipo);
+            _comando.Connection.Close();
+            return _comando;
+        }
+
+
+
     }
 }

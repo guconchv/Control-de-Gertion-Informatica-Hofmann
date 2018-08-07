@@ -74,7 +74,6 @@
     	
 </head>
 <body>
-
     <div  align="center" style="width: 1700px; height: 70px;">
        <br />
         <br />
@@ -122,8 +121,7 @@
                                             
         </td>             
     </tr>
-               
-               <tr align="center">
+    <tr align="center">
        <td class="auto-style14" >
            <asp:Label ID="Label10" runat="server" CssClass="Texto" Text="VENTA :" Font-Size="10pt"></asp:Label>
         </td>
@@ -137,13 +135,11 @@
               <asp:TextBox ID="txt_fecha" runat="server"  Height="16px" Width="130px" Enabled="True" CssClass="textbox" style=" text-align: center"></asp:TextBox>    
         </td>             
     </tr>
-
                <tr align="center">
                      <td class="auto-style12" >
                         <asp:TextBox ID="txtEquipo" runat="server" onkeypress="return solonumeros(event)" Height="16px" Width="130px" CssClass="textbox"></asp:TextBox>
                      </td>
                </tr>
-
          </center>
          </table>
 </div>
@@ -170,7 +166,6 @@
         <caption>
             &nbsp;
         </caption>
-        
       <tr>
                <td class="auto-style2">
               <asp:TextBox ID="txtNumero" name="txtNumero" runat="server"></asp:TextBox>
@@ -194,10 +189,8 @@
         <caption>
             &nbsp;
         </caption>
-       
         <tr >
             <td class="auto-style2"></td>
-
        <td colspan="6"><asp:GridView ID="dgvDetalle" runat="server" Width="760px"><EditRowStyle HorizontalAlign="Center" Width="100px" Height="30px" />
                     <HeaderStyle BackColor="#FF3300" Font-Bold="True" ForeColor="White"></HeaderStyle>
                     <RowStyle BackColor="White" HorizontalAlign="Center" VerticalAlign="Middle" Width="100px" Height="30px"></RowStyle> <HeaderStyle />

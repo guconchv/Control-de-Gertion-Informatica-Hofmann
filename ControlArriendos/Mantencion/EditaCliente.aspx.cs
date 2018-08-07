@@ -76,7 +76,7 @@ namespace ControlArriendos.Mantencion
             txtRut.Enabled = false;
             this.txtDigito.Text = lector.Rows[0][1].ToString();
             txtDigito.Enabled = false;
-            this.txtNombre.Text = lector.Rows[0][2].ToString();
+            this.txtnombre.Text = lector.Rows[0][2].ToString();
             this.txtDireccion.Text = lector.Rows[0][3].ToString();
             this.txtFijo.Text = lector.Rows[0][6].ToString();
             this.txtMovil.Text = lector.Rows[0][7].ToString();
@@ -97,7 +97,7 @@ namespace ControlArriendos.Mantencion
             if (DropComuna.SelectedValue != "-1" & DropCiudad.SelectedValue != "-1" & DropEstado.SelectedValue != "-1")
             {
                 Rut = Request.QueryString["ID"];
-                Nombre = txtNombre.Text;
+                Nombre = txtnombre.Text;
                 Direccion = txtDireccion.Text;
                 TelFijo = txtFijo.Text;
                 TelMovil = txtMovil.Text;

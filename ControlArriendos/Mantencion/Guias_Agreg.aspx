@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Guias_Agreg.aspx.cs" Inherits="ControlArriendos.Mantencion.WebForm1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
- <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
      <script>
@@ -183,8 +183,6 @@
                     </td>
                     <td style="height: 27px; width: 139px;">
                           <asp:Label ID="lblusuarioResp" runat="server" Text="Usuario Responsable : "></asp:Label>
-         
-                         
                     </td>
                     <td style="width: 194px" >
                        <asp:TextBox ID="tbxUsrResponsable"   runat="server" Height="16px" Width="218px"  CssClass="textbox"></asp:TextBox>

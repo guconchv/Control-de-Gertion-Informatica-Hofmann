@@ -117,7 +117,7 @@
     <Content Include="css\jquery.lightbox-0.5.css" />
     <Content Include="css\lightbox.css" />
     <Content Include="css\main.css" />
-    <Content Include="Consultas\Consultas.aspx" />
+    <Content Include="Mantencion\Consultas.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Imagenes\Adm.jpg" />
     <Content Include="Imagenes\Agregar.jpg" />
@@ -249,11 +249,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consultas\Consultas.aspx.cs">
+    <Compile Include="Mantencion\Consultas.aspx.cs">
       <DependentUpon>Consultas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Consultas\Consultas.aspx.designer.cs">
+    <Compile Include="Mantencion\Consultas.aspx.designer.cs">
       <DependentUpon>Consultas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Consultas\Informes\InformeListarEnsamble.aspx.cs">

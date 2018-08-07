@@ -42,15 +42,12 @@
              </td>
             <td style="width: 8px"></td>
              <td>
-                 <asp:Button ID="btnConsulta2" runat="server" Text="Devoluciones" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" OnClick="Consulta2_Click" Width="111px" />
+                 <asp:Button ID="btnConsulta2" runat="server" Text="Facturas" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" OnClick="Consulta2_Click" Width="111px" />
              </td>
              <td style="width: 8px"></td>
             <td>
-                 <asp:Button ID="btnConsulta3" runat="server" Text="Ensambles" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" OnClick="Consulta3_Click" Width="143px" />
+                 <asp:Button ID="btnConsulta3" runat="server" Text="Equipos" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" OnClick="Consulta3_Click" Width="143px" />
             </td> 
-            <td>
-               <asp:Button ID="btnTecnicos" runat="server" Text="Tecnicos" BackColor="#CCFF99" BorderStyle="None" ForeColor="Blue" Height="26px" OnClick="btnTecnicos_Click" Width="143px" />
-            </td>
         </tr>
      </table>  
            </center>       
@@ -410,9 +407,9 @@
                       <td>
                           <table>
                               <tr>
-                                <td>Cliente</td>
+                                <td>Codigo Equipo</td>
                                   <td> 
-                                    <asp:DropDownList ID="DropRutCliente" runat="server" Width="142px" CssClass="textbox"></asp:DropDownList>
+                                    <asp:TextBox ID="Codigoequipo" runat="server" Height="16px" Width="130px" CssClass="textbox"></asp:TextBox>
                                   </td>
                                </tr>
                           </table>
@@ -434,72 +431,80 @@
                 <td>
                 
       
-               <asp:GridView ID="GrillaEnsamble" runat="server" CellPadding="4"  RowStyle-BackColor="#D8D8D8" AlternatingRowStyle-BackColor="#FA8258" HeaderStyle-BackColor="#6E6E6E" HeaderStyle-Font-Bold="true" HeaderStyle-ForeColor="White"  AutoGenerateColumns="False" AllowPaging="True"  Width="757px"  Height="30px"  PageSize="7" OnSelectedIndexChanged="GVDevolucion_SelectedIndexChanged" OnPageIndexChanging="GVDevolucion_PageIndexChanging" > 
+               <asp:GridView ID="GrillaEquipos" runat="server" CellPadding="4"  RowStyle-BackColor="#D8D8D8" AlternatingRowStyle-BackColor="#FA8258" HeaderStyle-BackColor="#6E6E6E" HeaderStyle-Font-Bold="true" HeaderStyle-ForeColor="White"  AutoGenerateColumns="False" AllowPaging="True"  Width="757px"  Height="30px"  PageSize="7" OnSelectedIndexChanged="GVDevolucion_SelectedIndexChanged" OnPageIndexChanging="GVDevolucion_PageIndexChanging" > 
                  <HeaderStyle CssClass="Tabla_comentario_cabecera" />
                 <AlternatingRowStyle BackColor="#E2E2E2"></AlternatingRowStyle>
                 <Columns>
-                    <asp:TemplateField HeaderText="Nro Hoja Ensamble">
+                    <asp:TemplateField HeaderText="Codigo">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtcodigo" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("che_nro_che")%>'></asp:Label>
+                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("id_equipo")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Rut">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtrut" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("Rut")%>'></asp:Label>
+                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("rut")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Cliente">
+                    <asp:TemplateField HeaderText="Factura">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtfactura" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label10" runat="server" Text='<%# Eval("fact_relacionada")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Usuario">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtusuario" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="Label3" runat="server" Text='<%# Eval("nombre")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Tipo Equipo">
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("descripcion")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Tecnico">
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("tec_Ide_tec")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Hardware">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txthardware" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("item")%>'></asp:Label>
+                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("hardware")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Marca">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtmarca" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("marca")%>'></asp:Label>
+                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("marca")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Modelo">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtmodelo" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label8" runat="server" Text='<%# Eval("modelo")%>'></asp:Label>
+                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("modelo")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Serie">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtserie" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("serie")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Comentario">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtcomentario" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label8" runat="server" Text='<%# Eval("comentario")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -513,137 +518,12 @@
                             
                         </table>
                     </div>
-                    <h2 style="color:blue;">!Sin datos de Devoluciones!</h2>
+                    <h2 style="color:blue;">!Sin datos de Equipos!</h2>
                 </EmptyDataTemplate>
                 <HeaderStyle />
                 <RowStyle cssClass="Tabla_contenido" HorizontalAlign="Center" />
                 <SelectedRowStyle cssClass="Tabla_contenido" />
                    
-            </asp:GridView>
-             </td>
-            </tr>
-        </table>
-          </div>
-            <br />
-   </asp:Panel>
-    <asp:Panel ID="PanelTecnicos" runat="server" Width="1406px" Height="319px" >
-        <div class="div2" align="center">
-            <table class="tabla4">
-                <tr>
-                    <td style="width: 193px">
-                          <asp:Panel ID="Panel2" runat="server" Visible="False">
-                              <div id="Div2" style="width: 141px">
-                                  <strong style="color: #FF0000">¡EL INFORME ESTÁ SIN DATOS!</strong>
-                              </div>
-                          </asp:Panel>
-                      </td>
-                    <td style="width: 75px">
-                               <asp:ImageButton ID="ImageButton3" runat="server" Height="43px" ImageUrl="~/Imagenes/iconos/icoinforme.png" title="Exportar"  Width="54px" OnClick="btn_Imprimir_Tecnicos_Click"/>
-                           </td>
-                      <td style="width: 18px">
-                           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                      </td>
-                      <td>
-                          <table>
-                              <tr>
-                                <td>Tecnico</td>
-                                  <td> 
-                                    <asp:DropDownList ID="DropDownListTecnicos" runat="server" Width="142px" CssClass="textbox"></asp:DropDownList>
-                                  </td>
-                               </tr>
-                          </table>
-                          </td>
-                          <td>
-                               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                          </td>
-                          <td>
-                                <asp:Button ID="Button1" runat="server" Text="Limpiar" CssClass="BotonGris" Height="27px" Width="67px" OnClick="btn_limpiarens_Click" />
-                          </td>
-                           <td style="width: 91px">
-                            <asp:Button ID="Button2" runat="server" Text="Buscar" CssClass="BotonRojo" OnClick="btn_BuscarTecnicos_Clic" Height="27px" Width="67px" />
-                          </td>
-               </tr> 
-       </table>
-        <table>
-            <tr>
-                <td style="width: 420px"></td>
-                <td>
-               <asp:GridView ID="GridTecnicos" runat="server" CellPadding="4"  RowStyle-BackColor="#D8D8D8" AlternatingRowStyle-BackColor="#FA8258" HeaderStyle-BackColor="#6E6E6E" HeaderStyle-Font-Bold="true" HeaderStyle-ForeColor="White"  AutoGenerateColumns="False" AllowPaging="True"  Width="757px"  Height="30px"  PageSize="7" OnSelectedIndexChanged="GVDevolucion_SelectedIndexChanged" OnPageIndexChanging="GVDevolucion_PageIndexChanging" > 
-                 <HeaderStyle CssClass="Tabla_comentario_cabecera" />
-                <AlternatingRowStyle BackColor="#E2E2E2"></AlternatingRowStyle>
-                <Columns>
-                    <asp:TemplateField HeaderText="Rut">
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("Rut")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Nombre">
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("Nombre")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Telefono">
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="Label3" runat="server" Text='<%# Eval("Telefono")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Movil">
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("Movil")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Correo">
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("Correo")%>'></asp:Label>
-                        </ItemTemplate>
-                      </asp:TemplateField>
-                             <asp:TemplateField HeaderText="Estado">
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("Estado")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Usuario">
-                        <EditItemTemplate>
-                            <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
-                        </EditItemTemplate>
-                        <ItemTemplate>
-                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("Usuario")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-
-                <EditRowStyle HorizontalAlign="Center" Width="100px" />
-                    <HeaderStyle BackColor="#FF3300" Font-Bold="True" ForeColor="White"></HeaderStyle>
-                    <RowStyle BackColor="White" HorizontalAlign="Center" VerticalAlign="Middle" Width="100px" Height="30px"></RowStyle>
-                <EmptyDataTemplate>
-                    <div class="Tabla_comentario_cabecera">
-                        <table cellpadding="4" class="Tabla_comentario_cabecera" gridlines="None">
-                            
-                        </table>
-                    </div>
-                    <h2 style="color:blue;">!Sin datos de Tecnicos!</h2>
-                </EmptyDataTemplate>
-                <HeaderStyle />
-                <RowStyle cssClass="Tabla_contenido" HorizontalAlign="Center" />
-                <SelectedRowStyle cssClass="Tabla_contenido" />
             </asp:GridView>
              </td>
             </tr>

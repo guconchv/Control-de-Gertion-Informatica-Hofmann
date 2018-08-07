@@ -40,6 +40,15 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
+        /// Control txtrut.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtrut;
+        
+        /// <summary>
         /// Control Label6.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace ControlArriendos.Mantencion {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label6;
+        
+        /// <summary>
+        /// Control txtNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
         
         /// <summary>
         /// Control Label1.
@@ -76,13 +94,13 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// Control DropDepartamento.
+        /// Control txtdepartamento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDepartamento;
+        protected global::System.Web.UI.WebControls.TextBox txtdepartamento;
         
         /// <summary>
         /// Control Label7.
@@ -139,22 +157,22 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.TextBox txt_fecha;
         
         /// <summary>
-        /// Control Label15.
+        /// Control Label11.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label15;
+        protected global::System.Web.UI.WebControls.Label Label11;
         
         /// <summary>
-        /// Control DropDownListTipo.
+        /// Control txttipo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListTipo;
+        protected global::System.Web.UI.WebControls.TextBox txttipo;
         
         /// <summary>
         /// Control Label16.
@@ -166,13 +184,13 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label16;
         
         /// <summary>
-        /// Control DropTecnico.
+        /// Control txttecnico.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropTecnico;
+        protected global::System.Web.UI.WebControls.TextBox txttecnico;
         
         /// <summary>
         /// Control Label17.
@@ -184,13 +202,13 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label17;
         
         /// <summary>
-        /// Control DropDownListWin.
+        /// Control txtOffice.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListWin;
+        protected global::System.Web.UI.WebControls.TextBox txtOffice;
         
         /// <summary>
         /// Control Label18.
@@ -202,13 +220,31 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label18;
         
         /// <summary>
-        /// Control DropDownListOffice.
+        /// Control txtwindows.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListOffice;
+        protected global::System.Web.UI.WebControls.TextBox txtwindows;
+        
+        /// <summary>
+        /// Control Label15.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label15;
+        
+        /// <summary>
+        /// Control txtfactura.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtfactura;
         
         /// <summary>
         /// Control Label4.
@@ -220,13 +256,13 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
-        /// Control txtCodigo.
+        /// Control txtcodigo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigo;
+        protected global::System.Web.UI.WebControls.TextBox txtcodigo;
         
         /// <summary>
         /// Control Label8.

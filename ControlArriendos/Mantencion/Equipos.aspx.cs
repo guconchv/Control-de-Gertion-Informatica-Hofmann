@@ -12,38 +12,51 @@ namespace ControlArriendos.Mantencion
     public partial class Equipos : System.Web.UI.Page
     {
         string CadenaConexion = MasterPage.CadenaConexion;
+        int codigo;
         string rut;
         string nombre;
-        string telef;
-        string depar;
+        int telef;
+        int movil;
+        string departamento;
         string correo;
         DateTime fecha;
-        string tip;
         string tecnico;
-        int licen_off;
-        int licen_win;
-        string id_equipo;
-        string eq_hardware;
-        string eq_marca;
-        string eq_modelo;
-        string eq_serie;
-        string comentarios;
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack)
-            {
-            }
-        }
-
-        public void GuardarRegistroEquipos()
-        {
-            DataTable registro = new DataTable();
-           registro = PreparaAcceso.RegistroEquipo(rut, nombre, telef, depar, correo, fecha, tip, tecnico, licen_off, licen_win,
-            id_equipo, eq_hardware, eq_marca, eq_modelo, eq_serie, comentarios, CadenaConexion);
-        }
+        string tipo;
+        string office;
+        string windows;
+        int factura_rela;
+        string hardware;
+        string marca;
+        string modelo;
+        string serie;
+        string comentario;
+        
         protected void GuardarIngreso(object sender, EventArgs e)
         {
-            GuardarRegistroEquipos();
+                codigo = Convert.ToInt32(txtcodigo.Text);
+                rut = txtrut.Text;
+                nombre = txtNombre.Text;
+                telef = Convert.ToInt32(txtanexo.Text);
+                movil = Convert.ToInt32(txtcelular.Text);
+                departamento = txtdepartamento.Text;
+                correo = txtcorreo.Text;
+                fecha = Convert.ToDateTime(txt_fecha.Text);
+                tipo = txttipo.Text;
+                tecnico = txttecnico.Text;
+                office = txtOffice.Text;
+                windows = txtwindows.Text;
+                factura_rela = Convert.ToInt32(txtfactura.Text);
+                hardware = txtHardware.Text;
+                marca = txtMarca.Text;
+                modelo = txtModelo.Text;
+                serie = txtSerie.Text;
+                comentario = txtComentario.Text;
+
+                DataTable InsertarEquipo = new DataTable();
+
+                InsertarEquipo = PreparaAcceso.CompletarRegistro(codigo, rut, nombre, telef, movil, departamento, correo, fecha, tipo,
+                tecnico, office, windows,factura_rela, hardware, marca, modelo, serie, comentario, CadenaConexion);
+                Response.Write("<script >alert('Datos Guardados Correctamente');location.href = 'Equipos.aspx';</script>");
         }
     }
 }

@@ -29,7 +29,11 @@ body { margin: 50px 0 0; background: #fff url(../Imagenes/bg.gif) repeat-x; font
  
 #teaser { clear: both; height: 180px; background: #fff url(../Imagenes/teaserbg.jpg) repeat-x; }
 	.box { float: left; padding: 66px 0 0; width: 480px; color: #C7E3EE;}
-	#image { float: right; width: 388px; position: relative; top: 16px; background: url(../Imagenes/logotype.jpg) no-repeat top right; height: 258px; }
+	#image { float: right; width: 388px; position: relative; top: 25px; 
+background: url('../Imagenes/logotype.jpg') no-repeat right top; 
+height: 258px;
+    left: -109px;
+}
 	
 #bar { height: 40px; margin: 0 0 30px; padding: 8px 0 0 0; background: url(../Imagenes/bar.gif) repeat-x; }
 	.step { cursor: pointer; color: #FAFDDD; padding: 4px 0 0 11px; margin: 0 35px 0 0; font-size: 1.4em; float: left; text-align: center; background: url(../Imagenes/step.gif) no-repeat; height: 30px; }

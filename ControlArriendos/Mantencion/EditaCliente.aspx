@@ -79,7 +79,7 @@
        <td class="auto-style20" style="width: 148px">
            <asp:Label ID="Label6" runat="server" CssClass="Texto" Text="NOMBRE :" Font-Size="10pt"></asp:Label>
         </td>
-       <td class="auto-style20" style="width: 324px"><asp:TextBox ID="txtNombre" MaxLength="80" required="active" runat="server" Height="16px" Width="170px" onkeypress="return soloLetras(event)" CssClass="textbox"></asp:TextBox>                                  
+       <td class="auto-style20" style="width: 324px"><asp:TextBox ID="txtnombre" MaxLength="80" required="active" runat="server" Height="16px" Width="170px" onkeypress="return soloLetras(event)" CssClass="textbox"></asp:TextBox>                                  
         </td>             
     </tr>
        <tr align="center">

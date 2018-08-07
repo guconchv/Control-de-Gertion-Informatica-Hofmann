@@ -13,11 +13,9 @@ namespace Negocios
 {
     public class PreparaAcceso
     {
-       
-
-        public static DataTable BuscaParametrosPorTabla(int CodTab,string CadenaConexion)
+        public static DataTable BuscaParametrosPorTabla(int CodTab, string CadenaConexion)
         {
-            SqlCommand _comando = AccesoDatos.ObtenerParamentrosPorTabla(CodTab,  CadenaConexion);
+            SqlCommand _comando = AccesoDatos.ObtenerParamentrosPorTabla(CodTab, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }
@@ -29,7 +27,7 @@ namespace Negocios
         }
         public static DataTable BuscaListaParmetrosInfCompletaPorCodigo(int CodTab, string CadenaConexion)
         {
-            SqlCommand _comando = AccesoDatos.ObtenerParamentrosInfComPorCodigo(CodTab,CadenaConexion);
+            SqlCommand _comando = AccesoDatos.ObtenerParamentrosInfComPorCodigo(CodTab, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }
@@ -45,11 +43,11 @@ namespace Negocios
             }
             return var;
         }
-        public static bool Buscar_DescripcionDeTabPar(int codpar,string descripcion, string CadenaConexion)
+        public static bool Buscar_DescripcionDeTabPar(int codpar, string descripcion, string CadenaConexion)
         {
 
             bool var = false;
-            IDataReader lector = AccesoDatos.VerificaDescripcionDeTabPar(codpar,descripcion, CadenaConexion);
+            IDataReader lector = AccesoDatos.VerificaDescripcionDeTabPar(codpar, descripcion, CadenaConexion);
             while (lector.Read())
             {
                 var = true;
@@ -58,19 +56,19 @@ namespace Negocios
         }
         public static DataTable Crear_ParametroNuevo(int codTab, string CodDescrip, int CdoEstado, int cod_sis, string CodAux, string CadenaConexion)
         {
-            SqlCommand _comando = AccesoDatos.CrearComParametroNuevo(codTab, CodDescrip, CdoEstado, cod_sis , CodAux, CadenaConexion);
+            SqlCommand _comando = AccesoDatos.CrearComParametroNuevo(codTab, CodDescrip, CdoEstado, cod_sis, CodAux, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
             //return AccesoDatos.Crear_NuevoParametro(codTab, CodDescrip,CdoEstado,CodAux,Comentario, usuario,CadenaConexion);
         }
-        public static DataTable Crear_DescripPar(string Descrip, int estado, int cod_sis ,string cod_aux, string CadenaConexion)
+        public static DataTable Crear_DescripPar(string Descrip, int estado, int cod_sis, string cod_aux, string CadenaConexion)
         {
             SqlCommand _comando = AccesoDatos.CrearComandoTablaPar(Descrip, estado, cod_sis, cod_aux, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
             //return AccesoDatos.Crear_Descripcion_TablaPar(Descrip, estado, cod_aux, comentario, usuario,CadenaConexion);
         }
-        public static DataTable Modificar_Descripcion(int codigo, string Descrip, int estado,int cod_sis, string cod_aux, string CadenaConexion)
+        public static DataTable Modificar_Descripcion(int codigo, string Descrip, int estado, int cod_sis, string cod_aux, string CadenaConexion)
         {
             SqlCommand _comando = AccesoDatos.CrearComandoModificaTabla(codigo, Descrip, estado, cod_sis, cod_aux, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
@@ -96,15 +94,15 @@ namespace Negocios
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }
-        public static DataTable InsertarGuia(Decimal nroGuia,int rutcliente, string nomusuario, string CueServidor, string passServidor, string numserie, string sisasignado, int sucursal, string nomequipo, string descripcion, string dirrecionip, string sisoperativo, string antivirus, string office, string idteamviewer, string passteamviewer, DateTime fecha, string observaciones, int estado, string usuresponsable,int TipoEquipo, string CadenaConexion)
+        public static DataTable InsertarGuia(Decimal nroGuia, int rutcliente, string nomusuario, string CueServidor, string passServidor, string numserie, string sisasignado, int sucursal, string nomequipo, string descripcion, string dirrecionip, string sisoperativo, string antivirus, string office, string idteamviewer, string passteamviewer, DateTime fecha, string observaciones, int estado, string usuresponsable, int TipoEquipo, string CadenaConexion)
         {
             SqlCommand _comando = AccesoDatos.IngresarNuevaGuia(nroGuia, rutcliente, nomusuario, CueServidor, passServidor, numserie, sisasignado, sucursal, nomequipo, descripcion, dirrecionip, sisoperativo, antivirus, office, idteamviewer, passteamviewer, fecha, observaciones, estado, usuresponsable, TipoEquipo, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }
-        public static void ActualizarGuia(int nroGuia, string nomusuario, string CueServidor, string passServidor, string numserie, string sisasignado, int sucursal, string nomequipo, string descripcion, string dirrecionip, string sisoperativo, string antivirus, string office, string idteamviewer, string passteamviewer, DateTime fecha, string observaciones, int estado, string usuresponsable,int TipoEquipo, string CadenaConexion)
+        public static void ActualizarGuia(int nroGuia, string nomusuario, string CueServidor, string passServidor, string numserie, string sisasignado, int sucursal, string nomequipo, string descripcion, string dirrecionip, string sisoperativo, string antivirus, string office, string idteamviewer, string passteamviewer, DateTime fecha, string observaciones, int estado, string usuresponsable, int TipoEquipo, string CadenaConexion)
         {
-            SqlCommand _comando = AccesoDatos.actualizarGuia(nroGuia, nomusuario, CueServidor, passServidor, numserie, sisasignado, sucursal, nomequipo, descripcion, dirrecionip, sisoperativo, antivirus, office, idteamviewer, passteamviewer, fecha, observaciones, estado, usuresponsable, TipoEquipo,CadenaConexion);
+            SqlCommand _comando = AccesoDatos.actualizarGuia(nroGuia, nomusuario, CueServidor, passServidor, numserie, sisasignado, sucursal, nomequipo, descripcion, dirrecionip, sisoperativo, antivirus, office, idteamviewer, passteamviewer, fecha, observaciones, estado, usuresponsable, TipoEquipo, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             AccesoDatos.EjecutarComando(_comando);
         }
@@ -181,7 +179,7 @@ namespace Negocios
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }
-        
+
         public static DataTable LLenarCliente(Decimal Rut, string Nombre, string CadenaConexion)
         {
             SqlCommand _comando = AccesoDatos.LLenar_Cliente(Rut, Nombre, CadenaConexion);
@@ -273,7 +271,7 @@ namespace Negocios
             return AccesoDatos.EjecutarComando(_comando);
         }
 
-        public static DataTable BuscarLLenarConsulta(string Fecha,int Estado,int TipoEquipo, string IP, string CadenaConexion)
+        public static DataTable BuscarLLenarConsulta(string Fecha, int Estado, int TipoEquipo, string IP, string CadenaConexion)
         {
             SqlCommand _comando = AccesoDatos.Buscar_LLenar_Consulta(Fecha, Estado, TipoEquipo, IP, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
@@ -317,20 +315,20 @@ namespace Negocios
             int numericDigito = (11 - suma % 11);
             string digito = numericDigito == 11 ? "0" : numericDigito == 10 ? "K" : numericDigito.ToString();
             return digito;
-        } 
+        }
 
         //***************************************************************************************************************************************
         //************************* Fin FDiaz ************************************************
         //************************* Inicio Katherine Candia *********************************************
-        public static DataTable ObtenerGuiasDevueltas(int Cliente,string CadenaConexion)
+        public static DataTable ObtenerGuiasDevueltas(int Cliente, string CadenaConexion)
         {
-            SqlCommand _comando = AccesoDatos.LlenarGuiasDevueltas(Cliente,CadenaConexion);
+            SqlCommand _comando = AccesoDatos.LlenarGuiasDevueltas(Cliente, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
-            return AccesoDatos.EjecutarComando(_comando); 
+            return AccesoDatos.EjecutarComando(_comando);
         }
         public static DataTable ModificarEstadoGuia(int NroGuia, string CadenaConexion)
         {
-            SqlCommand _comando = AccesoDatos.ModificarEstadoGuia(NroGuia,CadenaConexion);
+            SqlCommand _comando = AccesoDatos.ModificarEstadoGuia(NroGuia, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }
@@ -340,9 +338,9 @@ namespace Negocios
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }
-        public static DataTable BuscarDevoluciones(string Fecha, int Sucursal, int Cliente,string CadenaConexion)
+        public static DataTable BuscarDevoluciones(string Fecha, int Sucursal, int Cliente, string CadenaConexion)
         {
-            SqlCommand _comando = AccesoDatos.BuscarLlenaDevoluciones(Fecha,Sucursal,Cliente,CadenaConexion);
+            SqlCommand _comando = AccesoDatos.BuscarLlenaDevoluciones(Fecha, Sucursal, Cliente, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }
@@ -377,14 +375,22 @@ namespace Negocios
 
         //*********DROGUERIA HOFMANN***********
 
-        public static DataTable RegistroEquipo(string rut, string nombre, string telef, string depar, string correo, DateTime fecha,
-            string tip, string tecnico, int licen_off, int licen_win, string id_equipo, string eq_hardware, string eq_marca, string eq_modelo, string eq_serie,
-            string comentarios, string CadenaConexion)
+        public static DataTable CompletarRegistro(int equipo, string rut_persona, string nombre_per, int telefono_per, int movil, string departamento__per, string correo_per,
+            DateTime fecha_per, string tecnico_per, string tipo_per, string office_per, string windows_per, int fact_relacionada, string hardware_per, string marca_per,
+            string modelo_per, string serie_per, string comentarios_per, string CadenaConexion)
         {
-            SqlCommand _comando = AccesoDatos.AgregarRegistroEquipos(rut, nombre, telef, depar, correo, fecha,tip, tecnico, licen_off, licen_win, id_equipo, eq_hardware, eq_marca, eq_modelo, eq_serie,comentarios, CadenaConexion);
+            SqlCommand _comando = AccesoDatos.RegistrarEquipos(equipo, rut_persona, nombre_per, telefono_per, movil, departamento__per, correo_per, fecha_per, tecnico_per,
+                tipo_per,office_per, windows_per,fact_relacionada, hardware_per,marca_per,modelo_per,serie_per, comentarios_per, CadenaConexion);
+            _comando.CommandType = CommandType.StoredProcedure;
+            return AccesoDatos.EjecutarComando(_comando);
+        }
+        public static DataTable BuscarRegistro(int equipo, string CadenaConexion)
+        {
+            SqlCommand _comando = AccesoDatos.BuscarRegistroEquipos(equipo, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }
 
-    }
+    }       
+
 }

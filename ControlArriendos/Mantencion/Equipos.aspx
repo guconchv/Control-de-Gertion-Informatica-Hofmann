@@ -13,6 +13,20 @@
              }).val();
          });
       </script>
+
+    <script> 
+        function confirmar() {
+            var x;
+            if (confirm("¿Desea agregar otro registro?") == true)
+            {
+                 x = "Has pulsado OK!";
+            }
+            else {
+                 x = "Has pulsado cancel!";
+                 }
+            document.getElementById("demo").innerHTML = x;
+}
+        </script>
 <head >
     <title></title>
     	
@@ -33,16 +47,16 @@
             <table  class="Tabla_Estructura">
                  <tr align="center">
        <td class="auto-style14" >
-           <asp:Label ID="Label5" runat="server" CssClass="Texto" Text="RUT  " Font-Size="10pt"></asp:Label>
+           <asp:Label ID="Label5" runat="server" CssClass="Texto" Text="RUT" Font-Size="10pt"></asp:Label>
         </td>
        <td class="auto-style12" >
-           <asp:TextBox ID="rut" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+           <asp:TextBox ID="txtrut" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
         </td>
        <td class="auto-style20" style="width: 148px">
            <asp:Label ID="Label6" runat="server" CssClass="Texto" Text="NOMBRE" Font-Size="10pt"></asp:Label>
         </td>
         <td class="auto-style12" >
-           <asp:TextBox ID="nombre" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+           <asp:TextBox ID="txtNombre" MaxLength="80" required="active" runat="server" Height="17px"  Width="133px" onkeypress="return soloLetras(event)" CssClass="textbox"></asp:TextBox>
         </td>
     </tr>
     <caption>
@@ -59,9 +73,7 @@
            <asp:Label ID="Label3" runat="server" CssClass="Texto" Text="DEPARTAMENTO :" Font-Size="10pt"></asp:Label>
         </td>
        <td class="auto-style29">         
-          <asp:DropDownList 
-              ID="DropDepartamento" TextDefault="Seleccione" runat="server" CssClass="Texto" Height="25px" Width="140px">
-          </asp:DropDownList>                            
+          <asp:TextBox ID="txtdepartamento" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>                        
         </td>
     </tr>
        <tr align="center">
@@ -78,47 +90,48 @@
            <asp:TextBox ID="txtcorreo" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
         </td>
     </tr>
-       <tr align="center">
-           <caption>
-               &lt;<td class="auto-style20" style="width: 148px">
-                   <asp:Label ID="Label80" runat="server" CssClass="Texto" Font-Size="10pt" Text="FECHA INGRESO :"></asp:Label>
-               </td>
-               <td class="auto-style30">
-                   <asp:TextBox ID="txt_fecha" runat="server" CssClass="textbox" Enabled="True" Height="16px" style=" text-align: center" Width="130px"></asp:TextBox>
-               </td>
-               <td class="auto-style14">
-                   <asp:Label ID="Label15" runat="server" CssClass="Texto" Font-Size="10pt" Text="TIPO  :"></asp:Label>
-               </td>
-               <td class="auto-style29">
-                   <asp:DropDownList ID="DropDownListTipo" runat="server" CssClass="Texto" Height="25px" TextDefault="Seleccione" Width="140px">
-                   </asp:DropDownList>
-               </td>
-           </caption>
-        </tr>
+      <tr aling="center">
+         <td class="auto-style20" style="width: 148px">
+            <asp:Label ID="Label80" runat="server" CssClass="Texto" Font-Size="10pt" Text="FECHA INGRESO :"></asp:Label>
+         </td>
+         <td class="auto-style30">
+            <asp:TextBox ID="txt_fecha" runat="server" CssClass="textbox" required="active" Enabled="True" Height="16px" style=" text-align: center" Width="130px"></asp:TextBox>
+         </td>
+         <td class="auto-style20" style="width: 148px">
+            <asp:Label ID="Label11" runat="server"  CssClass="Texto" Font-Size="10pt" Text="TIPO :"></asp:Label>
+         </td>
+         <td class="auto-style29">
+            <asp:TextBox ID="txttipo" runat="server" required="active" Height="16px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+         </td>
+       </tr>
        <tr align="center">
         <td class="auto-style14" >
             <asp:Label ID="Label16" runat="server" CssClass="Texto" Text="INGRESADO POR  :" Font-Size="10pt"></asp:Label>
-       </td>
-       <td class="auto-style29">         
-          <asp:DropDownList 
-              ID="DropTecnico" TextDefault="Seleccione" runat="server" CssClass="Texto" Height="25px" Width="140px">
-          </asp:DropDownList>                            
+       </td>        
+          <td class="auto-style29">
+            <asp:TextBox ID="txttecnico" runat="server" required="active" Height="16px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>                
         </td>
+
         <td class="auto-style20" style="width: 148px">
            <asp:Label ID="Label17" runat="server" CssClass="Texto" Text="LICENCIA OFFICE :" Font-Size="10pt"></asp:Label>
         </td>
-       <td class="auto-style29">         
-          <asp:DropDownList 
-              ID="DropDownListWin" TextDefault="Seleccione" runat="server" CssClass="Texto" Height="25px" Width="140px">
-          </asp:DropDownList>                            
+       <td class="auto-style20" >
+           <asp:TextBox ID="txtOffice" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+        </td>
+           
          <tr align ="center">
             <td class="auto-style20" style="width: 148px">
            <asp:Label ID="Label18" runat="server" CssClass="Texto" Text="LICENCIA WINDOWS :" Font-Size="10pt"></asp:Label>
         </td>
-       <td class="auto-style29">         
-          <asp:DropDownList 
-              ID="DropDownListOffice" TextDefault="Seleccione" runat="server" CssClass="Texto" Height="25px" Width="140px">
-          </asp:DropDownList>
+             <td class="auto-style29" >
+           <asp:TextBox ID="txtwindows" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+        </td>
+             <td class="auto-style21" style="width: 148px">
+           <asp:Label ID="Label15" runat="server" CssClass="Texto" Text="FACT. RELACIONADA :" Font-Size="10pt"></asp:Label>
+        </td>
+             <td class="auto-style29" >
+           <asp:TextBox ID="txtfactura" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+        </td>
         </tr> 
            </tr>
          </center>
@@ -130,47 +143,45 @@
                             <asp:Label ID="Label4" runat="server" CssClass="Texto" Font-Size="10pt" Text="Codigo"></asp:Label>
                         </td>
                        <td class="auto-style20">
-                            <asp:TextBox ID="txtCodigo" runat="server" MaxLength="30" name="txtequipo"></asp:TextBox>
+                            <asp:TextBox ID="txtcodigo" runat="server" required="active" MaxLength="30" name="txtequipo"></asp:TextBox>
                         </td>
                         <td class="auto-style12">
                             <asp:Label ID="Label8" runat="server" CssClass="Texto" Font-Size="10pt" Text="Hardware"></asp:Label>
                         </td>
                         <td class="auto-style29">
-                            <asp:TextBox ID="txtHardware" runat="server" MaxLength="30" name="txthardware" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="txtHardware" runat="server" required="active" MaxLength="30" name="txthardware" TextMode="MultiLine"></asp:TextBox>
                         </td>
                         <td class="auto-style20" style="width: 90px">
                             <asp:Label ID="Label9" runat="server" CssClass="Texto" Font-Size="10pt" Text="Marca"></asp:Label>
                         </td>
                         <td class="auto-style30">
-                            <asp:TextBox ID="txtMarca" runat="server" MaxLength="30" name="txtmarca"></asp:TextBox>
+                            <asp:TextBox ID="txtMarca" runat="server" required="active" MaxLength="30" name="txtmarca"></asp:TextBox>
                         </td>
-                        </tr>
+                    </tr>
                     <tr>
                         <td class="auto-style29">
                             <asp:Label ID="Label12" runat="server" CssClass="Texto" Font-Size="10pt" Text="Modelo"></asp:Label>
                         </td>
                         <td class="auto-style31">
-                            <asp:TextBox ID="txtModelo" runat="server" MaxLength="30" name="txtmodelo"></asp:TextBox>
+                            <asp:TextBox ID="txtModelo" runat="server" required="active" MaxLength="30" name="txtmodelo"></asp:TextBox>
                         </td>
                         <td class="auto-style29">
                             <asp:Label ID="Label13" runat="server" CssClass="Texto" Font-Size="10pt" Text="Serie"></asp:Label>
                         </td>
                         <td class="auto-style32">
-                            <asp:TextBox ID="txtSerie" runat="server" MaxLength="30" name="txtsodelo"> </asp:TextBox>
+                            <asp:TextBox ID="txtSerie" runat="server" required="active" MaxLength="30" name="txtsodelo"> </asp:TextBox>
                         </td>
                         <td class="auto-style29" style="width: 90px">
                             <asp:Label ID="Label14" runat="server" CssClass="Texto" Font-Size="10pt" Text="Comentarios"></asp:Label>
                         </td>
                         <td class="auto-style33">
-                            <asp:TextBox ID="txtComentario" runat="server" MaxLength="400" name="txtcomentario" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="txtComentario" runat="server" required="active" MaxLength="400" name="txtcomentario" TextMode="MultiLine"></asp:TextBox>
                         </td>
                     </tr>
                 </table>
                 <tr align="center">
-                    <td>
-                    <td  ><asp:Button ID="btn_guardado" runat="server" CssClass="BotonAzul" Text="Agregar" OnClick="GuardarIngreso" Height="69px" Width="118px"></asp:Button></td>
-                    </td>
-                </tr>
+                    <td ><asp:Button ID="btn_guardado" runat="server" CssClass="BotonAzul" Text="Agregar" OnClick="GuardarIngreso" Height="42px" Width="94px"></asp:Button></td>
+               </tr>
             </div>
             <table class="Tabla_Estructura">
             </table>
