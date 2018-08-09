@@ -16,24 +16,12 @@ namespace ControlArriendos
     {
         string cadenaConexion = MasterPage.CadenaConexion;
         string Fecha;
-        string FechaDev;
         int Estado;
         int TipoEquipo;
-        int Sucursal;
-        int Cliente;
-        int RutTec;
         int codigo_equipo;
-        string IP;
         string rut_empre;
-        string nom_empre;
         int num_fac;
-        DateTime fech_factura;
-        int telfono;
-        string correo;
-        DateTime fech_registro;
         string orden_comp;
-        decimal monto;
-        string detalle_fac;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -82,7 +70,7 @@ namespace ControlArriendos
             Fecha = txtFecha.Text;
 
             DataTable Buscar = new DataTable();
-            Buscar = PreparaAcceso.BuscarLLenarConsulta(Fecha, Estado, TipoEquipo, IP, cadenaConexion);
+            Buscar = PreparaAcceso.BuscarLLenarConsulta(Fecha, Estado, TipoEquipo, cadenaConexion);
             GrillaConsulta.DataSource = Buscar;
             GrillaConsulta.DataBind();
         }
@@ -173,25 +161,13 @@ namespace ControlArriendos
         }
         protected void btn_buscar_Click(object sender, EventArgs e)
         {
-            rut_empre = txtrut_empresa.Text;
-            orden_comp = txtOC.Text;
-            num_fac = Convert.ToInt32(txtfacturas.Text);
-
-            if (txtrut_empresa.Text ==null)
-            {
-                rut_empre = "";
-            }
-            if (txtOC==null)
-            {
-                orden_comp = "";
-            }
-            else
-            { 
-            DataTable BuscarFacturas = new DataTable();
-                BuscarFacturas = PreparaAcceso.GuardarFacturas(rut_empre, nom_empre, num_fac, fech_factura, telfono, correo, fech_registro, orden_comp, monto, detalle_fac, cadenaConexion);
-                GVDevolucion.DataSource = BuscarFacturas;
-                GVDevolucion.DataBind();
-            }
+                rut_empre = txtrut_empresa.Text;
+                orden_comp = txtOC.Text;
+               // num_fac = Convert.ToInt32(txtfacturas.Text);
+                    DataTable BuscarFacturas = new DataTable();
+                    BuscarFacturas = PreparaAcceso.BuscaquedaFacturas(rut_empre, orden_comp, num_fac, cadenaConexion);
+                    GVDevolucion.DataSource = BuscarFacturas;
+                    GVDevolucion.DataBind();
         }
         protected void btn_limpiar_Click(object sender, EventArgs e)
         {

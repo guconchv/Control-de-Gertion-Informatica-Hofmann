@@ -271,9 +271,9 @@ namespace Negocios
             return AccesoDatos.EjecutarComando(_comando);
         }
 
-        public static DataTable BuscarLLenarConsulta(string Fecha, int Estado, int TipoEquipo, string IP, string CadenaConexion)
+        public static DataTable BuscarLLenarConsulta(string Fecha, int Estado, int TipoEquipo, string CadenaConexion)
         {
-            SqlCommand _comando = AccesoDatos.Buscar_LLenar_Consulta(Fecha, Estado, TipoEquipo, IP, CadenaConexion);
+            SqlCommand _comando = AccesoDatos.Buscar_LLenar_Consulta(Fecha, Estado, TipoEquipo, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }
@@ -395,6 +395,13 @@ namespace Negocios
             string orden_compra, decimal total, string descripcion, string CadenaConexion)
         {
             SqlCommand _comando = AccesoDatos.InsertarFacturas(rut, nombre, factura, fecha, fono, mail, registro, orden_compra, total, descripcion, CadenaConexion);
+            _comando.CommandType = CommandType.StoredProcedure;
+            return AccesoDatos.EjecutarComando(_comando);
+        }
+
+        public static DataTable BuscaquedaFacturas(string rut_em, string ord_comp, int numer_factura, string CadenaConexion)
+        {
+            SqlCommand _comando = AccesoDatos.BuscarFacturas(rut_em, ord_comp, numer_factura, CadenaConexion);
             _comando.CommandType = CommandType.StoredProcedure;
             return AccesoDatos.EjecutarComando(_comando);
         }

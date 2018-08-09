@@ -27,7 +27,7 @@ namespace ControlArriendos.Mantencion.Informes
         {   
 
             ReportViewer1.Reset();//Reseteamos el Reporte
-            DataTable dsC = PreparaAcceso.BuscarLLenarConsulta(Convert.ToString(Session["Fecha"]), Convert.ToInt32(Session["Estado"]), Convert.ToInt32(Session["TipoEquipo"]), Convert.ToString(Session["IP"]), cadenaConexion);     //.LLenarConsultaGuia(cadenaConexion); //Con este datatable capturaremos el dato retornado para nuestro parametro
+            DataTable dsC = PreparaAcceso.BuscarLLenarConsulta(Convert.ToString(Session["Fecha"]), Convert.ToInt32(Session["Estado"]), Convert.ToInt32(Session["TipoEquipo"]), cadenaConexion);     //.LLenarConsultaGuia(cadenaConexion); //Con este datatable capturaremos el dato retornado para nuestro parametro
             ReportDataSource datasource = new ReportDataSource("DataSet2", dsC);// nombre del dataset(que guardara los datos+datatable que trae el parametro 
             ReportViewer1.LocalReport.DataSources.Add(datasource);//Le decimos que el reporte es de tipo local
             ReportViewer1.LocalReport.ReportPath = Server.MapPath("Reportes/ReportConsultas.rdlc"); //se mapea la direccion de nuestro reporte dentro del proyecto. 

@@ -492,7 +492,7 @@ namespace Datos
             _comando.Connection.Close();
             return _comando;
         }
-        public static SqlCommand Buscar_LLenar_Consulta(string Fecha, int Estado, int TipoEquipo, string IP, string CadenaConexion)
+        public static SqlCommand Buscar_LLenar_Consulta(string Fecha, int Estado, int TipoEquipo, string CadenaConexion)
         {
             string _cadenaconexion = CadenaConexion;
             SqlConnection _conexion = new SqlConnection(_cadenaconexion);
@@ -500,7 +500,6 @@ namespace Datos
             _comando.Parameters.AddWithValue("@Fecha", Fecha);
             _comando.Parameters.AddWithValue("@Estado", Estado);
             _comando.Parameters.AddWithValue("@TipoEquipo", TipoEquipo);
-            _comando.Parameters.AddWithValue("@IP", IP);
             _comando.Connection.Close();
             return _comando;
         }
@@ -670,5 +669,16 @@ namespace Datos
             return _comando;
         }
 
+        public static SqlCommand BuscarFacturas(string rut_empresa, string orden_de_compra, int num_factura, string CadenaConexion)
+        {
+            string _cadenaconexion = CadenaConexion;
+            SqlConnection _conexion = new SqlConnection(_cadenaconexion);
+            SqlCommand _comando = new SqlCommand("DH_BuscaFacturasPorRut_GC", _conexion);
+            _comando.Parameters.AddWithValue("@rut", rut_empresa);
+            _comando.Parameters.AddWithValue("@orden_de_compra", orden_de_compra);
+            _comando.Parameters.AddWithValue("@nro_factura", num_factura);
+            _comando.Connection.Close();
+            return _comando;
+        }
     }
 }
