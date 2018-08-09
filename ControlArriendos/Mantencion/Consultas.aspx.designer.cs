@@ -157,31 +157,31 @@ namespace ControlArriendos {
         protected global::System.Web.UI.WebControls.ImageButton btn_informedev;
         
         /// <summary>
-        /// Control txt_fecdev.
+        /// Control txtrut_empresa.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_fecdev;
+        protected global::System.Web.UI.WebControls.TextBox txtrut_empresa;
         
         /// <summary>
-        /// Control DropCliente.
+        /// Control txtOC.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropCliente;
+        protected global::System.Web.UI.WebControls.TextBox txtOC;
         
         /// <summary>
-        /// Control DropSucursal.
+        /// Control txtfacturas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropSucursal;
+        protected global::System.Web.UI.WebControls.TextBox txtfacturas;
         
         /// <summary>
         /// Control btn_limpiardev.

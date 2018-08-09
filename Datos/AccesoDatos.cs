@@ -605,9 +605,10 @@ namespace Datos
             return _comando;
         }
 
-        //******************DROGUERIA HOFMANN************************\\
+        //******************DROGUERIA HOFMANN************************GUSTAVO CONCHA*************************************\\
 
 
+        // Insertar Registros en la BD
         public static SqlCommand RegistrarEquipos(int cod_equipo, string rut, string nombre, int anexo, int celular,
             string departamento, string correo, DateTime fecha, string tecnico, string tipo, string licencia_off, string licencia_win,
             int fact_relacionada, string hardware, string marca, string modelo, string serie, string comentarios, string CadenaConexion)
@@ -637,6 +638,7 @@ namespace Datos
             return _comando;
         }
 
+        // Buscar Registros de equipos insertados
         public static SqlCommand BuscarRegistroEquipos(int cod_equipo,string CadenaCnexion)
         {
             string _cadenaconexion = CadenaCnexion;
@@ -647,7 +649,26 @@ namespace Datos
             return _comando;
         }
 
-
+        // Insertar Facturas
+        public static  SqlCommand InsertarFacturas(string rut_empresa, string nombre_empresa, int nro_factura, DateTime fecha_factura,
+         int telefono, string correo, DateTime fecha_registro, string OC, decimal valor, string detalle, string CadenaConexion)
+        {
+            string _cadenaconexion = CadenaConexion;
+            SqlConnection _conexion = new SqlConnection(_cadenaconexion);
+            SqlCommand _comando = new SqlCommand("DH_InsertarFactura_GC", _conexion);
+            _comando.Parameters.AddWithValue("@rut_empresa", rut_empresa);
+            _comando.Parameters.AddWithValue("@nombre_empresa", nombre_empresa);
+            _comando.Parameters.AddWithValue("@nro_factura", nro_factura);
+            _comando.Parameters.AddWithValue("@fecha_factura", fecha_factura);
+            _comando.Parameters.AddWithValue("@telefono", telefono);
+            _comando.Parameters.AddWithValue("@correo", correo);
+            _comando.Parameters.AddWithValue("@fecha_registro", fecha_registro);
+            _comando.Parameters.AddWithValue("@OC", OC);
+            _comando.Parameters.AddWithValue("@valor", valor);
+            _comando.Parameters.AddWithValue("@detalle_factura", detalle);
+            _comando.Connection.Close();
+            return _comando;
+        }
 
     }
 }

@@ -76,13 +76,13 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// Control documento.
+        /// Control nro_documento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox documento;
+        protected global::System.Web.UI.WebControls.TextBox nro_documento;
         
         /// <summary>
         /// Control Label3.
@@ -112,13 +112,13 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label7;
         
         /// <summary>
-        /// Control txtcelular.
+        /// Control telefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtcelular;
+        protected global::System.Web.UI.WebControls.TextBox telefono;
         
         /// <summary>
         /// Control Label10.
@@ -130,13 +130,13 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label10;
         
         /// <summary>
-        /// Control txtcorreo.
+        /// Control correo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtcorreo;
+        protected global::System.Web.UI.WebControls.TextBox correo;
         
         /// <summary>
         /// Control Label16.
@@ -148,13 +148,13 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label16;
         
         /// <summary>
-        /// Control txtfechaingreso.
+        /// Control fechaingreso.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtfechaingreso;
+        protected global::System.Web.UI.WebControls.TextBox fechaingreso;
         
         /// <summary>
         /// Control Label17.
@@ -166,13 +166,13 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label17;
         
         /// <summary>
-        /// Control txtOffice.
+        /// Control OC.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtOffice;
+        protected global::System.Web.UI.WebControls.TextBox OC;
         
         /// <summary>
         /// Control Label18.
@@ -184,13 +184,13 @@ namespace ControlArriendos.Mantencion {
         protected global::System.Web.UI.WebControls.Label Label18;
         
         /// <summary>
-        /// Control montotal.
+        /// Control valor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox montotal;
+        protected global::System.Web.UI.WebControls.TextBox valor;
         
         /// <summary>
         /// Control Label11.

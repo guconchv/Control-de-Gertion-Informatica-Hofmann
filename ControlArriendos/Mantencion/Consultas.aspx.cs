@@ -14,6 +14,7 @@ namespace ControlArriendos
 {
     public partial class Consultas : System.Web.UI.Page
     {
+        string cadenaConexion = MasterPage.CadenaConexion;
         string Fecha;
         string FechaDev;
         int Estado;
@@ -23,19 +24,27 @@ namespace ControlArriendos
         int RutTec;
         int codigo_equipo;
         string IP;
-        string cadenaConexion = MasterPage.CadenaConexion;
+        string rut_empre;
+        string nom_empre;
+        int num_fac;
+        DateTime fech_factura;
+        int telfono;
+        string correo;
+        DateTime fech_registro;
+        string orden_comp;
+        decimal monto;
+        string detalle_fac;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 txtFecha.Attributes.Add("readonly", "readonly");
-                txt_fecdev.Attributes.Add("readonly", "readonly");
+            //    txtfechafactura.Attributes.Add("readonly", "readonly");
                 LlenaDropDownList();
                 LLenaGrilla();
                 LlenarGrillaDev();
                 LLenaGrillaEn();
-                LlenaDropDownListDevolucion();
                 PanelPrincipal.Visible = true;
                 PanelConsulta1.Visible = true;
                 PanelConsulta2.Visible = false;
@@ -161,48 +170,28 @@ namespace ControlArriendos
                 PanelMsje.Visible = true;
                 return;
             }
-
-            Sucursal = Convert.ToInt32(DropSucursal.SelectedValue);
-            Cliente = Convert.ToInt32(DropCliente.SelectedValue);
-            FechaDev = txtFecha.Text;
-            Session["Sucursal"] = Sucursal;
-            Session["Cliente"] = Cliente;
-            Session["FechaDev"] = FechaDev;
-            Response.Redirect("~/Consultas/Informes/InformeDevoluciones.aspx");
-            //}
-        }
-        public void LlenaDropDownListDevolucion()
-        {
-            DataTable sucursal = new DataTable();
-
-            sucursal = PreparaAcceso.BuscaParametrosPorTabla(Codigo_TablasPadres.CodSucursales, cadenaConexion);
-
-            DropSucursal.DataSource = sucursal;
-            DropSucursal.DataValueField = "PAR_COD_PAR";
-            DropSucursal.DataTextField = "PAR_DES_PAR";
-            DropSucursal.DataBind();
-            DropSucursal.SelectedValue = "-1";
-
-            DataTable cliente = new DataTable();
-
-            cliente = PreparaAcceso.BuscarRutNomClientes(cadenaConexion);
-
-            DropCliente.DataSource = cliente;
-            DropCliente.DataValueField = "cli_rut_cli";
-            DropCliente.DataTextField = "cli_nom_cli";
-            DropCliente.DataBind();
-            DropCliente.SelectedValue = "-1";
         }
         protected void btn_buscar_Click(object sender, EventArgs e)
         {
-            Sucursal = Convert.ToInt32(DropSucursal.SelectedValue);
-            Cliente = Convert.ToInt32(DropCliente.SelectedValue);
-            FechaDev = txt_fecdev.Text;
+            rut_empre = txtrut_empresa.Text;
+            orden_comp = txtOC.Text;
+            num_fac = Convert.ToInt32(txtfacturas.Text);
 
-            DataTable BuscarDev = new DataTable();
-            BuscarDev = PreparaAcceso.BuscarDevoluciones(FechaDev, Sucursal, Cliente, cadenaConexion);
-            GVDevolucion.DataSource = BuscarDev;
-            GVDevolucion.DataBind();
+            if (txtrut_empresa.Text ==null)
+            {
+                rut_empre = "";
+            }
+            if (txtOC==null)
+            {
+                orden_comp = "";
+            }
+            else
+            { 
+            DataTable BuscarFacturas = new DataTable();
+                BuscarFacturas = PreparaAcceso.GuardarFacturas(rut_empre, nom_empre, num_fac, fech_factura, telfono, correo, fech_registro, orden_comp, monto, detalle_fac, cadenaConexion);
+                GVDevolucion.DataSource = BuscarFacturas;
+                GVDevolucion.DataBind();
+            }
         }
         protected void btn_limpiar_Click(object sender, EventArgs e)
         {
@@ -215,9 +204,6 @@ namespace ControlArriendos
         }
         protected void btn_limpiardev_Click(object sender, EventArgs e)
         {
-            txt_fecdev.Text = "";
-            DropCliente.SelectedValue = "-1";
-            DropSucursal.SelectedValue = "-1";
             LLenaGrilla();
             LlenarGrillaDev();
             LLenaGrillaEn();
@@ -258,9 +244,6 @@ namespace ControlArriendos
 
         protected void btn_limpiarens_Click(object sender, EventArgs e)
         {
-            txt_fecdev.Text = "";
-            DropCliente.SelectedValue = "-1";
-            DropSucursal.SelectedValue = "-1";
             LLenaGrilla();
             LlenarGrillaDev();
             LLenaGrillaEn();

@@ -15,7 +15,7 @@
       </script>
         <script>
          $(document).ready(function () {
-             $('#<%=txtfechaingreso.ClientID%>').datepicker({
+             $('#<%=fechaingreso.ClientID%>').datepicker({
                  dateFormat: 'dd-mm-yy',
                  maxDate: "+0m +0d",
                  changeMonth: true,
@@ -62,7 +62,7 @@
            <asp:Label ID="Label1" runat="server" CssClass="Texto" Text="NRO DOCUMENTO:" Font-Size="10pt"></asp:Label>
         </td>
        <td class="auto-style12" >
-           <asp:TextBox ID="documento" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+           <asp:TextBox ID="nro_documento" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
         </td>
        <td class="auto-style20" style="width: 148px">
             <asp:Label ID="Label3" runat="server" CssClass="Texto" Font-Size="10pt" Text="FECHA DOCUMENTO :"></asp:Label>
@@ -76,13 +76,13 @@
            <asp:Label ID="Label7" runat="server" CssClass="Texto" Text="TELEFONO  :" Font-Size="10pt"></asp:Label>
         </td>
        <td class="auto-style12" >
-           <asp:TextBox ID="txtcelular" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+           <asp:TextBox ID="telefono" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
         </td>
        <td class="auto-style14" >
            <asp:Label ID="Label10" runat="server" CssClass="Texto" Text="CORREO  :" Font-Size="10pt"></asp:Label>
         </td>
        <td class="auto-style12" >
-           <asp:TextBox ID="txtcorreo" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+           <asp:TextBox ID="correo" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
         </td>
     </tr>
        <tr align="center">
@@ -90,21 +90,21 @@
             <asp:Label ID="Label16" runat="server" CssClass="Texto" Text="FECHA INGRESO  :" Font-Size="10pt"></asp:Label>
        </td>        
           <td class="auto-style29">
-            <asp:TextBox ID="txtfechaingreso" runat="server" CssClass="textbox" required="active" Enabled="True" Height="16px" style=" text-align: center" Width="130px"></asp:TextBox>                
+            <asp:TextBox ID="fechaingreso" runat="server" CssClass="textbox" required="active" Enabled="True" Height="16px" style=" text-align: center" Width="130px"></asp:TextBox>                
         </td>
 
         <td class="auto-style20" style="width: 148px">
            <asp:Label ID="Label17" runat="server" CssClass="Texto" Text="ORDEN DE COMPRA :" Font-Size="10pt"></asp:Label>
         </td>
        <td class="auto-style20" >
-           <asp:TextBox ID="txtOffice" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+           <asp:TextBox ID="OC" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
         </td>
          <tr align ="center">
             <td class="auto-style20" style="width: 148px">
            <asp:Label ID="Label18" runat="server" CssClass="Texto" Text="MONTO TOTAL :" Font-Size="10pt"></asp:Label>
         </td>
              <td class="auto-style29" >
-           <asp:TextBox ID="montotal" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
+           <asp:TextBox ID="valor" runat="server" required="active" Height="16px" Width="130px" onkeypress="return solonumeros(event)" CssClass="textbox"></asp:TextBox>
         </td>
              <td class="auto-style21" style="width: 148px">
            <asp:Label ID="Label11" runat="server" CssClass="Texto" Text="Detalle :" Font-Size="10pt"></asp:Label>
@@ -114,13 +114,12 @@
         </td>
         </tr> 
            </tr>
-         </center>
          </table>
             <div align="center" style="width: 1700px; height: 520px;">
                 <table id="tabla" style="width: 757px; margin-top: 17px; margin-left: 0px;">
                 </table>
                 <tr align="center">
-                    <td ><asp:Button ID="btn_guardado" runat="server" CssClass="BotonAzul" Text="Agregar" Height="42px" Width="94px"></asp:Button></td>
+                    <td ><asp:Button ID="btn_guardado" runat="server" CssClass="BotonAzul" Text="Agregar" Height="42px" Width="94px" OnClick="AgregarFacturas"></asp:Button></td>
                </tr>
             </div>
             <table class="Tabla_Estructura">

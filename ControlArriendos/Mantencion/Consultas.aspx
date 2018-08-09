@@ -16,14 +16,6 @@
                  changeYear: true
              }).val();
          });
-         $(document).ready(function () {
-             $('#<%=txt_fecdev.ClientID%>').datepicker({
-                  dateFormat: 'dd-mm-yy',
-                  maxDate: "+0m +0d",
-                  changeMonth: true,
-                  changeYear: true
-              }).val();
-          });
       </script>
     <asp:Panel ID="PanelPrincipal" runat="server" Width="1143px" Height="157px">
  
@@ -253,21 +245,21 @@
                       <td>
                           <table>
                              <tr>
-                                  <td>Fecha Devolución</td>
+                                  <td>Rut Empresa</td>
                                   <td>
-                                      <asp:TextBox ID="txt_fecdev" runat="server" class="labelClass" Width="132px" CssClass="textbox" Height="16px" MaxLength="10" ></asp:TextBox>
+                                      <asp:TextBox ID="txtrut_empresa" runat="server" Height="16px" Width="130px" CssClass="textbox"></asp:TextBox>
                                   </td>
                               </tr>
                               <tr>
-                                <td>Cliente</td>
+                                <td>Orden de Compra</td>
                                   <td> 
-                                    <asp:DropDownList ID="DropCliente" runat="server" Width="142px" CssClass="textbox"></asp:DropDownList>
+                                    <asp:TextBox ID="txtOC" runat="server" Height="16px" Width="130px" CssClass="textbox"></asp:TextBox>
                                   </td>
                                </tr>
                               <tr>
-                                   <td>Sucursal</td>
+                                   <td>Nro Factura</td>
                                   <td>
-                                      <asp:DropDownList ID="DropSucursal" runat="server" Width="142px" CssClass="textbox"></asp:DropDownList>
+                                      <asp:TextBox ID="txtfacturas" runat="server" Height="16px" Width="130px" CssClass="textbox"></asp:TextBox>
                                   </td>
                               </tr>
                           </table>
@@ -291,90 +283,95 @@
                  <HeaderStyle CssClass="Tabla_comentario_cabecera" />
                 <AlternatingRowStyle BackColor="#E2E2E2"></AlternatingRowStyle>
                 <Columns>
-                    <asp:TemplateField HeaderText="Nro Guia">
+                    <asp:TemplateField HeaderText="Rut Empresa">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="rut_empresa" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("gce_nro_gce")%>'></asp:Label>
+                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("rut_empresa")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Cliente">
+                    <asp:TemplateField HeaderText="Nombre Empresa">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtnombre_empresa" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("nombreCliente")%>'></asp:Label>
+                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("nombre_empresa")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Nom Usuario">
+                    <asp:TemplateField HeaderText="Nro Factura">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="nrofactura" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label3" runat="server" Text='<%# Eval("gce_nom_usu")%>'></asp:Label>
+                            <asp:Label ID="Label3" runat="server" Text='<%# Eval("nro_factura")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Nom Equipo">
+                    <asp:TemplateField HeaderText="Fecha Factura">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="fechafactura" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("gce_nom_eqp")%>'></asp:Label>
+                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("fecha_factura")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Usu Responsable">
+                    <asp:TemplateField HeaderText="Telefono">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="telefono" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("gce_usr_gce")%>'></asp:Label>
+                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("telefono")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Sucursal">
+                    <asp:TemplateField HeaderText="Correo">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="correo" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("sucursal")%>'></asp:Label>
+                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("correo")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Estado">
+                    <asp:TemplateField HeaderText="Fecha Registro">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="fecharegistro" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("Estado")%>'></asp:Label>
+                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("fecha_registro")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Última Fecha Devolución">
+                    <asp:TemplateField HeaderText="Orden de Compra">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="OC" runat="server"></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label8" runat="server" Text='<%# Eval("FechaDevolucion")%>'></asp:Label>
+                            <asp:Label ID="Label8" runat="server" Text='<%# Eval("OC")%>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                     <asp:TemplateField HeaderText="Monto Total">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="valor" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label8" runat="server" Text='<%# Eval("valor")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                     <asp:TemplateField HeaderText="Detalle">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="valor" runat="server"></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label8" runat="server" Text='<%# Eval("detalle_factura")%>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
                 </Columns>
 
                 <EditRowStyle HorizontalAlign="Center" Width="100px" />
                     <HeaderStyle BackColor="#FF3300" Font-Bold="True" ForeColor="White"></HeaderStyle>
                     <RowStyle BackColor="White" HorizontalAlign="Center" VerticalAlign="Middle" Width="100px" Height="30px"></RowStyle>
                 <EmptyDataTemplate>
-                    <div class="Tabla_comentario_cabecera">
-                        <table cellpadding="4" class="Tabla_comentario_cabecera" gridlines="None">
-                            <tr>
-                                <center>
-                                    <td style="padding-left: 10px; padding-right: 30px;font-family:Arial; font-size: 12px; font-weight:bold">Rut</td>
-                                    <td style="padding-left: 10px; padding-right: 30px;font-family:Arial; font-size: 12px; font-weight:bold">Nombre</td>
-                                    <td style="padding-left: 10px; padding-right: 30px;font-family:Arial; font-size: 12px; font-weight:bold">Correo Electronico</td>
-                                    <td style="padding-left: 10px; padding-right: 30px;font-family:Arial; font-size: 12px;font-weight:bold">Estado</td>
-                                    <td></td>
-                                </center>
-                            </tr>
-                        </table>
-                    </div>
-                    <h2 style="color:blue;">!Sin datos de Devoluciones!</h2>
+                    
+                    <h2 style="color:blue;">!Sin datos de Facturas!</h2>
                 </EmptyDataTemplate>
                 <HeaderStyle />
                 <RowStyle cssClass="Tabla_contenido" HorizontalAlign="Center" />

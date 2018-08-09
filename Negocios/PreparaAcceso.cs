@@ -391,6 +391,14 @@ namespace Negocios
             return AccesoDatos.EjecutarComando(_comando);
         }
 
+        public static DataTable GuardarFacturas(string rut, string nombre, int factura, DateTime fecha, int fono, string mail, DateTime registro,
+            string orden_compra, decimal total, string descripcion, string CadenaConexion)
+        {
+            SqlCommand _comando = AccesoDatos.InsertarFacturas(rut, nombre, factura, fecha, fono, mail, registro, orden_compra, total, descripcion, CadenaConexion);
+            _comando.CommandType = CommandType.StoredProcedure;
+            return AccesoDatos.EjecutarComando(_comando);
+        }
+
     }       
 
 }
